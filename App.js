@@ -79,6 +79,16 @@ var result =  pricesSort.reduce(function(result, field, index) {
 console.log(result);
 
 // =======================================================================================================================
+// number 9 
+// Masking
+// expected *************ddd
+
+const number = '23dn3ir30fd2eddd';
+let result = number.replace(/.(?=.{3,}$)/g, '*');
+console.log(result);
+
+
+// =======================================================================================================================
 // number 10
 function fearNotLetter(str) {
   var i, j = 0, m = 122;
