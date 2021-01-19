@@ -11,7 +11,7 @@ const third = ['rolling', 'her', 'eyes'];
 let result = first.concat(second, third).join(" ");
 console.log("result: ",result);
 
-
+// =======================================================================================================================
 // number 2
 function checkNumber(number){
 	if(number%2){ // Ganjil
@@ -22,7 +22,7 @@ function checkNumber(number){
 }
 checkNumber(1);
 
-
+// =======================================================================================================================
 // number 4
 
 /** 
@@ -39,6 +39,7 @@ function countWord(word){
 const rest = countWord("lari pagi");
 console.log(rest);
 
+// =======================================================================================================================
 // number 5 
 const list_fruit_andi = ["grape","apple","orange","guava"];
 const list_fruit_andin = ["watermelon","apple","orange","strawberry"];
@@ -51,7 +52,7 @@ let removeDuplicate = [...new Set(restConcat)];
 
 console.log(removeDuplicate);
 
-
+// =======================================================================================================================
 // number 6
 
 // expected
@@ -76,3 +77,44 @@ var result =  pricesSort.reduce(function(result, field, index) {
 }, {})
 
 console.log(result);
+
+// =======================================================================================================================
+// number 10
+function fearNotLetter(str) {
+  var i, j = 0, m = 122;
+  if (str) {
+      i = str.charCodeAt(0);
+      while (i <= m && j < str.length) {
+          if (String.fromCharCode(i) !== str.charAt(j)) {
+              return String.fromCharCode(i);
+          }
+          i++; j++;
+      }
+  }
+  return undefined;
+}
+
+// expected
+// const list_letters_first = ["c","d","e","g","h"]
+// const list_letters_second = ["X","Z"]
+// list_letters_first = f
+// list_letters_second = Y
+console.log("list_letters_first:", fearNotLetter('cdegh'));
+console.log("list_letters_second:", fearNotLetter('XZ'));
+
+// =======================================================================================================================
+// number 11 ( Sorting Odd Numbers )
+
+// expected 
+// [1, 4, 2, 4, 3, 5, 9, 0]
+
+var array = [9,4,2,4,1,5,3,0]
+    indices = [];
+
+array
+    .filter((v, i) => v % 2 && indices.push(i))
+    .sort((a, b) => a - b)
+    .forEach((v, i) => array[indices[i]] = v);
+
+console.log(array);
+
