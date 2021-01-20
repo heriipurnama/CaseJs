@@ -179,6 +179,29 @@ array
 
 console.log(array);
 
+// number 12
+// triangle
+
+// expected
+/**
+ * 1000000
+   200000
+   30000
+   4000
+   500
+   60
+   7
+ * 
+ */
+
+  function generatePyramid(n) {
+    let getPiramid = n.split('')
+    for(let i=0; i < getPiramid.length; i++) {
+        console.log(String(i+1).padEnd((getPiramid.length - i), '0'))
+    }
+}
+
+generatePyramid('1234567');
 
 // =======================================================================================================================
 // number 15
