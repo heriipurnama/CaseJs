@@ -13,14 +13,65 @@ console.log("result: ",result);
 
 // =======================================================================================================================
 // number 2
+
+// genap dan berada diantara angka 5 hingga 10 maka cetaklah "Imperio".
 function checkNumber(number){
-	if(number%2){ // Ganjil
-    	console.log("Imperio"); 
+	if(number%2){ // Ganjil --> imperio
+     	 console.log("Imperio"); 
     }else{ //Genap
-    	console.log("Crucio");
+      if(number >=5 && number <=10 ){ // genap diantara 5 dan 10
+         console.log("Imperio"); 
+      } else {
+        console.log("Crucio"); // genap
+      }
     }
 }
-checkNumber(1);
+
+checkNumber(3);
+
+// =======================================================================================================================
+// number 3
+
+// expected 
+/**
+ * 
+1. Ganjil
+2. Genap
+3. Ganjil
+4. Genap
+5. Ganjil Kelipatan Lima
+6. Genap
+7. Ganjil
+8. Genap
+9. Ganjil
+10. Genap Kelipatan Lima
+...
+200. Kelipatan Seratus
+ */
+  
+function checkNumber(){
+    for(let i = 1; i <= 200; i++) {
+      if (i%2){
+        if (i%5 == 0){ 
+          console.log(i,": Ganjil kelipatan 5");
+        }else{
+            console.log(i,": Ganjil");
+       }
+      }else {
+        if (i%100 == 0){
+        	console.log(i,": Genap kelipatan 100");
+        } else {
+           if (i%5 == 0){ 
+            console.log(i,": Genap kelipatan 5");
+           }else{
+             console.log(i,": Genap");
+           }
+        }
+       
+     }
+  }
+}
+  checkNumber();
 
 // =======================================================================================================================
 // number 4
@@ -128,3 +179,17 @@ array
 
 console.log(array);
 
+
+// =======================================================================================================================
+// number 15
+const randomNumber = (number) => {
+	let count = 0;
+     let tebak
+  do {
+  	count +=1;
+    tebak = Math.floor(Math.random() * 100);
+  }while (number !== tebak)
+    console.log("hasil:", count);
+}
+
+randomNumber(1)
