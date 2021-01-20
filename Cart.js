@@ -2,41 +2,41 @@
 
       class Cart {
          constructor() {
-            this.wheels = 4
-            this.doors = 4
-            this.topSpeed = 100
-            this.feulCapacity = "400 Litres"
+            this.item = 4
+            this.qtys = 4
+            this.price = 100
+            this.diskon = "50%"
          }
 
-         setWheels(w) {
-            this.wheels = w;
+         setItem(w) {
+            this.item = w;
             return this;
          }
 
-         setDoors(d) {
-            this.doors = d;
+         setQuantity(d) {
+            this.qtys = d;
             return this;
          }
 
-         setTopSpeed(t) {
-            this.topSpeed = t;
+         setPrice(t) {
+            this.price = t;
             return this;
          }
 
-         setFeulCapacity(fc) {
-            this.feulCapacity = fc;
+         setDiskon(fc) {
+            this.diskon = fc;
             return this;
          }
 
          displayCarProps() {
-            console.log(`Your car has ${this.wheels} wheels,\
-            ${this.doors} doors with a top speed of ${this.topSpeed}\
-            and feul capacity of ${this.feulCapacity}`)
+            console.log(`Your cart has ${this.item} item,\
+            ${this.qtys} qtys with a price of ${this.price}\
+            and Diskon of ${this.diskon}`)
          }
       }
 
-      let sportsCar = new Cart()
-         .setDoors(2)
-         .setTopSpeed(250)
-         .setFeulCapacity("600 Litres")
+      let sportsCart = new Cart()
+         .setQuantity(2)
+         .setPrice(250)
+         .setDiskon("50%")
          .displayCarProps()

@@ -37,3 +37,24 @@ let log = new Log();
 const result = log.writeLog();
 console.log( result);
 
+// var file = new File(['foo', 'bar'], 'foobar.txt');
+
+// console.log('size=' + file.size);
+// console.log('type=' + file.type);
+// console.log('name=' + file.name);
+
+// var testEndings = function(string, endings) {
+//   var file = new File([string], { type: 'plain/text',
+//                                   endings: endings });
+//   var reader = new FileReader();
+//   reader.onload = function(event){
+//     console.log(endings + ' of ' + JSON.stringify(string) + 
+//                 ' => ' + JSON.stringify(reader.result));
+//   };
+//   reader.readAsText(file);
+// };
+
+// testEndings('foo\nbar',   'native');
+// testEndings('foo\r\nbar', 'native');
+// testEndings('foo\nbar',   'transparent');
+// testEndings('foo\r\nbar', 'transparent');
