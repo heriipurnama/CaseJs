@@ -130,6 +130,38 @@ var result =  pricesSort.reduce(function(result, field, index) {
 console.log(result);
 
 // =======================================================================================================================
+// number 8
+
+/**
+ * expected
+ * Array [3, 4, 5, 8, 9, 12]
+ * 
+ */
+function urut(a)
+{
+    var swapp;
+    var n = a.length-1;
+    var x=a;
+    do {
+        swapp = false;
+        for (var i=0; i < n; i++)
+        {
+            if (x[i] > x[i+1])
+            {
+               var temp = x[i];
+               x[i] = x[i+1];
+               x[i+1] = temp;
+               swapp = true;
+            }
+        }
+        n--;
+    } while (swapp);
+ return x; 
+}
+
+console.log(urut([12,3,5,4,8,9]));
+
+// =======================================================================================================================
 // number 9 
 // Masking
 // expected *************ddd
