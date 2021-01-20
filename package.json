@@ -1,0 +1,25 @@
+{
+  "name": "casejs",
+  "version": "1.0.0",
+  "description": "oop",
+  "main": "Car.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heriipurnama/CaseJs.git"
+  },
+  "keywords": [
+    "oopJS"
+  ],
+  "author": "heriipurnama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heriipurnama/CaseJs/issues"
+  },
+  "homepage": "https://github.com/heriipurnama/CaseJs#readme",
+  "dependencies": {
+    "crypto": "^1.0.1"
+  }
+}
