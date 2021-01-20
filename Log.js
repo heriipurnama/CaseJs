@@ -37,6 +37,8 @@ let log = new Log();
 const result = log.writeLog();
 console.log( result);
 
+// Make file .log without LIB
+
 // var file = new File(['foo', 'bar'], 'foobar.txt');
 
 // console.log('size=' + file.size);
