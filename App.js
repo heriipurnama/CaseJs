@@ -19,7 +19,7 @@ function checkNumber(number){
 	if(number%2){ // Ganjil --> imperio
      	 console.log("Imperio"); 
     }else{ //Genap
-      if(number >=5 && number <=10 ){ // genap diantara 5 dan 10
+      if(number >=5 && number <=10 ){ // genap diantara 5 dan 10 Imperio
          console.log("Imperio"); 
       } else {
         console.log("Crucio"); // genap
