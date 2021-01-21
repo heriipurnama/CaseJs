@@ -1,0 +1,31 @@
+{
+  "name": "casejs",
+  "version": "1.0.0",
+  "description": "day4",
+  "main": "Promise.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "js-cipher": "^1.0.5",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heriipurnama/CaseJs.git"
+  },
+  "keywords": [
+    "promise",
+    "async",
+    "await",
+    "callback"
+  ],
+  "author": "heriipurnama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heriipurnama/CaseJs/issues"
+  },
+  "homepage": "https://github.com/heriipurnama/CaseJs#readme"
+}
