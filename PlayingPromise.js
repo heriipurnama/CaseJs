@@ -27,3 +27,19 @@ const loopIng = () => {
 }
   
 loopIng();
+
+// after
+const loopIng2 = () => {
+  
+    for (let i = 1, p = Promise.resolve(); i <= 3; i++) {
+        p = p.then(_ => new Promise(resolve =>
+            setTimeout(function () {
+                console.log(i);
+                resolve();   
+            },1000)
+         ));
+    }
+ }
+     
+      
+loopIng2();
