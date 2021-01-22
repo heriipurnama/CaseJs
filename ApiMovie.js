@@ -56,10 +56,10 @@ async function runningEndPoint() {
   
 
     // result data
-    // console.log('getDataTitleInd : ', JSON.stringify(getTitleData));
+    console.log('getDataTitleInd : ', JSON.stringify(getTitleData));
     // console.log('getDataKeanuReeves : ', JSON.stringify(getData));
     // console.log('getMultipleData : ', JSON.stringify(getMultiDatas));
-     console.log('getDataPopular : ', getPularDatas);
+    // console.log('getDataPopular : ', getPularDatas);
 
 }
 
