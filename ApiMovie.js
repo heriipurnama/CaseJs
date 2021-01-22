@@ -23,9 +23,11 @@ class ApiMovie {
                             .get(API)
                             .catch((error) => console.log( error ));
         
+        let restMovies = restData.data.results;
+    
+        let restHightVoteRage = restMovies.filter((e) => e.vote_average > 7.5);
 
-        
-        return restData.data;
+        return restHightVoteRage;
     }
     
 }
@@ -47,17 +49,17 @@ async function runningEndPoint() {
     const searchPeople = 'search/multi?api_key=8edacdf50bd263c72f35033a49923666&language=en-US&query=Robert Downey Jr &query=Tom Holland&page=1';
     const getMultiDatas = await fetcher.getData(searchPeople);
 
-    // Get popular movie list that released on 2016 and the votes above 7.5
+    // Get popular movie list that released on 2020 and the votes above 7.5
     const searchPopular = 'movie/popular?api_key=8edacdf50bd263c72f35033a49923666&page=1';
     const getPularDatas = await fetcher.getDataPupular(searchPopular);
 
   
 
     // result data
-    console.log('getDataTitleInd : ', JSON.stringify(getTitleData));
+    // console.log('getDataTitleInd : ', JSON.stringify(getTitleData));
     // console.log('getDataKeanuReeves : ', JSON.stringify(getData));
     // console.log('getMultipleData : ', JSON.stringify(getMultiDatas));
-    // console.log('getDataPopular : ', JSON.stringify(getPularDatas));
+     console.log('getDataPopular : ', getPularDatas);
 
 }
 
