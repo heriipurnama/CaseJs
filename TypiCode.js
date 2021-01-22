@@ -12,7 +12,7 @@ const getPost = () =>
 
 const getUser = () =>
   axios
-    .get(`${APIusers}/users`)
+    .get(`${API}/users`)
     .then((response) => response.data);
 
 const mapToUser = (post, users) => {
@@ -27,7 +27,7 @@ const getAll = async () => {
   post = post.map((e) => mapToUser(e, user));
 
   let data = JSON.stringify(post);
-    fs.writeFileSync('user.json', data);
+    fs.writeFileSync('DataUser.json', data);
 };
 
 // call
