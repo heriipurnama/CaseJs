@@ -72,6 +72,13 @@ async function runningEndPoint() {
 
     const patchData = await fetcher.patchData();
 
+    console.log('getData', getData);
+    console.log('deleteData', deleteData);
+    console.log('postData', postData);
+    console.log('putData', putData);
+
+    console.log('patchData', patchData);
+
 }
 
 // run script
