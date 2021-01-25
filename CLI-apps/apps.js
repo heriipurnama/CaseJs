@@ -2,7 +2,11 @@
 // file: hello-world.js (make the file executable using `chmod +x hello.js`)
 
 // Caporal provides you with a program instance
-const { program } = require("@caporal/core")
+const { program } = require("@caporal/core");
+const os = require('os');
+const publicIp = require('public-ip');
+const ineed = require('ineed');
+
 
 // Simplest program ever: this program does only one thing
 program
@@ -180,24 +184,83 @@ program
         })
 
     .command("palindrome")
-        .argument("<num1>", "Add your string", {
+        .argument("<text>", "Add your string", {
             default: "rusak",
             validator: program.STRING
         })
 
-        .action(({ logger, args }) => {
-            const num1 = args.num1
-            const num2 = args.num2
-            const num3 = args.num3
-            const num4 = args.num4
+        .action(({ args }) => {
+            const text = args.text
 
-            const num5 = args.num5
+            function palindrome(text) {
+                let len = text.length;
+                let mid = Math.floor(len/2);
+            
+                for ( var i = 0; i < mid; i++ ) {
+                    if (text[i] !== text[len - 1 - i]) {
+                        return false;
+                    }
+                }
+            
+             return true;
+            }
+            const result = palindrome(text);
 
-            const result = (num1 * num2 * num3 * num4 * num5);
-
-            logger.info(result);
+            console.log("String:", text);
+            console.log("Is palindrome?", result);
         })
 
+    .command("ip")
+        .action(({ logger }) => {
+            const interfaces = os.networkInterfaces();
+            
+            const addresses = [];
+                for (var k in interfaces) {
+                    for (var k2 in interfaces[k]) {
+                        var address = interfaces[k][k2];
+                        if (address.family === 'IPv4' && !address.internal) {
+                            addresses.push(address.address);
+                        }
+                    }
+                }
+         
+            logger.info(addresses);
+        })
+    
+    .command("ip-external")
+        .action(({ logger }) => {
+        
+            (async () => {
+                try {
+                    const rest = await publicIp.v4();    
+                    logger.info(rest);
+                } catch (error) {
+                    console.log(error);
+                }
+                
+            })();
+        })
+
+    .command("headlines")
+        .action(() => { 
+            ineed.collect.images.hyperlinks.from('https://www.kompas.com/tag/headline',  
+            function (err, response, result) {
+                let restHeadLine = result.hyperlinks;
+                // rename property
+                restRenameHref = JSON.parse(
+                                 JSON.stringify(restHeadLine).split('"href":').join('"URL":')
+                              );
+      
+                restRenameText = JSON.parse(
+                                 JSON.stringify(restRenameHref).split('"text":').join('"Title":'),
+                              );
+      
+            let resultRenameProperty = restRenameText;
+         
+                console.log(resultRenameProperty);
+            });
+        })
+       
 // always run the program at the end
 program.run()
 
