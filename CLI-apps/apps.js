@@ -271,20 +271,6 @@ program
               .join("")
           );
         })
-
-    .command("randomw")
-        .option("--test", "testing", {
-          default: 32,
-          validator: program.NUMBER,
-        })
-        .option("--letters", "ignore string", {
-            default: 32,
-            validator: program.NUMBER,
-          })
-        .action(({ args, options }) => {
-          console.log(options.test);
-          // console.log(args, options);
-        })
         
     .command("random")
         .option("--panjang <number>", "", {
@@ -310,17 +296,15 @@ program
           char = char.split("");
           let output = "";
           while (output.length < options.panjang) {
-            let sizeRandom = options.uppercase
-              ? "toUpperCase"
-              : options.lowercase
-              ? "toLowerCase"
-              : Math.floor(Math.random() * 2) === 1
-              ? "toUpperCase"
+            let sizeRandom = options.uppercase ? "toUpperCase"
+              : options.lowercase ? "toLowerCase"
+                : Math.floor(Math.random() * 2) === 1 ? "toUpperCase"
               : "toLowerCase";
             output += char[Math.floor(Math.random() * char.length)][sizeRandom]();
           }
-          console.log(output);
+          logger.info(output);
         })
+
 // always run the program at the end
 program.run()
 

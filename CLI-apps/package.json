@@ -4,7 +4,7 @@
   "description": "",
   "main": "apps.js",
   "scripts": {
-     "test":"node test/index.js",
+     "test":"jest",
      "start-dev": "node test/app.js",
      "start-prod":"node test/app.js"
   },
