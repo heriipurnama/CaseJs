@@ -260,6 +260,16 @@ program
                 console.log(resultRenameProperty);
             });
         })
+    
+    .command("random")
+        .option("--test", "testing", {
+          default: 32,
+          validator: program.NUMBER,
+        })
+        .action(({ args, options }) => {
+          console.log(options.test);
+          // console.log(args, options);
+        });
        
 // always run the program at the end
 program.run()
