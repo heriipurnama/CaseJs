@@ -261,6 +261,17 @@ program
             });
         })
     
+    .command("obfuscate")
+        .argument("<text>")
+        .action(({ logger, args }) => {
+          logger.info(
+            args.text
+              .split("")
+              .map((char) => `&#${char.charCodeAt(0)};`)
+              .join("")
+          );
+        })
+
     .command("random")
         .option("--test", "testing", {
           default: 32,

@@ -1,0 +1,16 @@
+{
+  "name": "cli-apps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "apps.js",
+  "scripts": {
+     "test":"node test/index.js",
+     "start-dev": "node test/app.js",
+     "start-prod":"node test/app.js"
+  },
+  "author": "heriipurnama",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
