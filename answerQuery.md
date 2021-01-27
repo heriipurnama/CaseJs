@@ -27,6 +27,18 @@
         category varchar not null
     );
     ```
+    sql relation
+    ```sql
+        ALTER TABLE books 
+        ADD CONSTRAINT constraint_categories 
+        FOREIGN KEY (categoryId) 
+        REFERENCES categories (id);
+
+        ALTER TABLE books 
+        ADD CONSTRAINT constraint_writers
+        FOREIGN KEY (writeId) 
+        REFERENCES books (id);
+    ```
 2. Query Insert
  ```sql
 
