@@ -34,15 +34,12 @@ exports.insertUser = async function (req, res) {
 // insert data form
 exports.insertUserForm = function (req, res) {
 
-console.log(req.body.nama);
+    const nama = req.body.nama
+    const alamat = req.body.alamat
+    const motivasiHidup = req.body.motivasi_hidup
 
-const nama = req.body.nama
-const alamat = req.body.alamat
-const motivasiHidup = req.body.motivasi_hidup
+    const restReq = "Saya "+nama+", Motivasi hidup saya adalah "+motivasiHidup
 
-const restReq = "Saya "+nama+", Motivasi hidup saya adalah "+motivasiHidup
-
-console.log("result: ", restReq);
-helper.responseHTML(restReq, res)
-
+    console.log("result: ", restReq);
+    helper.responseHTML(restReq, res)
 }
