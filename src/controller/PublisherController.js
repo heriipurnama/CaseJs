@@ -1,13 +1,13 @@
 'use strict'
 
-let { publishers }= require('../db/models'); 
+let { publisher }= require('../db/models'); 
 let baseResponse = require('../utils/helper')
 
 class PublisherController {
 
   static async getAllDatas(req, res) {
     try {
-        const payload = await publishers.findAll();
+        const payload = await publisher.findAll();
         baseResponse({ message: "publishers retrieved", data: payload })(res);
     } catch (error) {
         console.log(error);
@@ -16,7 +16,7 @@ class PublisherController {
 
   static async getAllBook(req, res) {
     try {
-      const payload = await publishers.findAll({
+      const payload = await publisher.findAll({
         include : 'authors'
       });
       baseResponse({ message: "publishers retrieved", data: payload })(res);
@@ -27,7 +27,7 @@ class PublisherController {
 
   static async getById(req, res) {
     try {
-      const payload = await publishers.findByPk(req.params.id);
+      const payload = await publisher.findByPk(req.params.id);
       baseResponse({ message: "publishers retrieved", data: payload })(res);
     } catch (error) {
       console.log(error);
@@ -37,7 +37,7 @@ class PublisherController {
   static async createPublisher(req, res) {
     // seq.
     try {
-      const payload = await publishers.create({
+      const payload = await publisher.create({
         name: req.body.name,
         address: req.body.address,
         email: req.body.email,
@@ -52,7 +52,7 @@ class PublisherController {
 
   static async updatePublisher(req, res) {
     try {
-        const authorDetails = await publishers.update({
+        const authorDetails = await publisher.update({
             name: req.body.name,
             address: req.body.addres,
             email: req.body.email,
@@ -74,7 +74,7 @@ class PublisherController {
 
   static async deletePublisher(req, res) {
     try {
-        const datas = await publishers.destroy({
+        const datas = await publisher.destroy({
             where: {
                 id: req.params.id,
             },

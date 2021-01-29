@@ -1,34 +1,23 @@
 'use strict'
 
-let { books }= require('../db/models'); 
+let { author, book, publisher }= require('../db/models'); 
 let baseResponse = require('../utils/helper')
 
 class BookController {
 
   static async getAllDatas(req, res) {
     try {
-        const payload = await books.findAll();
+        const payload = await book.findAll();
         baseResponse({ message: "books retrieved", data: payload })(res);
     } catch (error) {
         console.log(error);
     }
   }
 
-  static async getAllBook(req, res) {
-    try {
-      const payload = await books.findAll({
-        include : 'authors',
-        attribute :['name']
-      });
-      baseResponse({ message: "books retrieved", data: payload })(res);
-  } catch (error) {
-      console.log(error);
-  }
-  }
 
   static async getById(req, res) {
     try {
-      const payload = await books.findByPk(req.params.id);
+      const payload = await book.findByPk(req.params.id);
       baseResponse({ message: "books retrieved", data: payload })(res);
     } catch (error) {
       console.log(error);
@@ -38,9 +27,9 @@ class BookController {
   static async createBook(req, res) {
     // seq.
     try {
-      const payload = await books.create({
-        authorId : req.body.authorId,
-        publisherId : req.body.publisherId,
+      const payload = await book.create({
+        author_id : req.body.authorId,
+        publisher_id : req.body.publisherId,
         title: req.body.title,
         price: req.body.price,
         year: req.body.year
@@ -53,9 +42,9 @@ class BookController {
 
   static async updateBook(req, res) {
     try {
-        const authorDetails = await books.update({
-          authorId : req.body.authorId,
-          publisherId : req.body.publisherId,
+        const authorDetails = await book.update({
+          author_id : req.body.authorId,
+          publisher_id : req.body.publisherId,
           title: req.body.title,
           price: req.body.price,
           year: req.body.year
@@ -75,7 +64,7 @@ class BookController {
 
   static async deleteBooks(req, res) {
     try {
-        const datas = await books.destroy({
+        const datas = await book.destroy({
             where: {
                 id: req.params.id,
             },
@@ -88,6 +77,48 @@ class BookController {
         console.log(error);
     }
   }
+
+  // relations
+  static async getBookAuthor(req, res) {
+    const payload = await book.findAll({
+        include: [{
+            model: author,
+            where: {
+                id: req.params.id,
+            },
+        }],   
+    })
+    response({ message: "get book with author success", data: payload})(res, 200);
+}
+
+static async getAuthorPublisher(req, res) {
+    const payload = await publisher.findAll({
+        include: {
+            model: book,
+            where: {
+                id: req.params.id
+            },
+            include: {
+                model: author,
+            },
+        },
+    })
+    response({ message: "get publisher with author success", data: payload})(res, 200);
+}
+
+static async getBookSpesific(req, res) {
+    const sort = req.query.sort_by
+    const order = req.query.order_by
+
+    if(sort === req.query.sort_by && order === req.query.order_by){
+        const payload = await book.findAll({
+            order: [
+                [sort, order],
+            ],
+        })
+        response({ message: "retrieved user", data: payload})(res, 200);
+    }
+}
 
 }
 

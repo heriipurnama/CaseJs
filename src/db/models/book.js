@@ -11,25 +11,32 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-
       book.belongsTo(models.author, {
-        foreignKey: {
-          name: "author_id"
-        },
-        as : "authors"
-      });
+        foreignKey: 'author_id'
+      }),
       book.belongsTo(models.publisher, {
-        foreignKey: {
-          name: "publisher_id"
-        }
+        foreignKey: 'publisher_id'
       })
-
     }
 
-  }
+  };
   book.init({
-    author_id: DataTypes.INTEGER,
-    publisher_id: DataTypes.INTEGER,
+    author_id: { 
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model : 'author',
+        key: 'id'
+      }
+    },
+    publisher_id: { 
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'publisher',
+        key: 'id'
+      }
+    },
     title: DataTypes.STRING,
     price: DataTypes.STRING,
     year: DataTypes.DATE,
