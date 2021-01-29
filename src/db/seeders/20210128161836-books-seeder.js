@@ -27,7 +27,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("Books", books);
+   await queryInterface.bulkInsert("books", books);
   },
 
   down: async (queryInterface, Sequelize) => {

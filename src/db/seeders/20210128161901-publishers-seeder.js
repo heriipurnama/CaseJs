@@ -28,7 +28,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("Publishers", publisers);
+   await queryInterface.bulkInsert("publishers", publisers);
   },
 
   down: async (queryInterface, Sequelize) => {

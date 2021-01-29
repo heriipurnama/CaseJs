@@ -8,7 +8,7 @@ var port = process.env.PORT || 4000
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-var routes = require('./src/router/routes')
+var routes = require('./src/router/routerAuthors')
 routes(app)
 
 app.listen(port)
