@@ -39,9 +39,11 @@ class BookController {
     // seq.
     try {
       const payload = await books.create({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
+        authorId : req.body.authorId,
+        publisherId : req.body.publisherId,
+        title: req.body.title,
+        price: req.body.price,
+        year: req.body.year
       });
       baseResponse({ message: "books created", data: payload })(res);
     } catch (error) {
@@ -52,9 +54,11 @@ class BookController {
   static async updateBook(req, res) {
     try {
         const authorDetails = await books.update({
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            email: req.body.email,
+          authorId : req.body.authorId,
+          publisherId : req.body.publisherId,
+          title: req.body.title,
+          price: req.body.price,
+          year: req.body.year
         },
         { where: { id: req.params.id } }
     );

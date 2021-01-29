@@ -38,9 +38,11 @@ class PublisherController {
     // seq.
     try {
       const payload = await publishers.create({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
+        name: req.body.name,
+        address: req.body.address,
         email: req.body.email,
+        phone: req.body.phone,
+        website: req.body.website
       });
       baseResponse({ message: "publishers created", data: payload })(res);
     } catch (error) {
@@ -51,9 +53,11 @@ class PublisherController {
   static async updatePublisher(req, res) {
     try {
         const authorDetails = await publishers.update({
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
+            name: req.body.name,
+            address: req.body.addres,
             email: req.body.email,
+            phone: req.body.phone,
+            website: req.body.website
         },
         { where: { id: req.params.id } }
     );
