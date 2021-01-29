@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // publisher.hasMany(models.book)
+
     }
   };
   publisher.init({
