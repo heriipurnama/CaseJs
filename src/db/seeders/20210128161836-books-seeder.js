@@ -6,8 +6,8 @@ faker.locale = "id_ID";
 const books = [...Array(10)].map((book, index) => {
   return {
     id: index +1,
-    author_id : Math.round(Math.random() + 1),
-    publisher_id : Math.round(Math.random() + 1),
+    authorId : faker.random.number({ 'min': 1, 'max': 20 }),
+    publisherId : faker.random.number({ 'min': 1, 'max': 1 }),
     title : faker.random.words(4),
     price : faker.finance.amount(1, 100, 2, 'Rp'),
     year : faker.date.past(),
