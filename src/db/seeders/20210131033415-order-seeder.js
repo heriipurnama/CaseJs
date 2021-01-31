@@ -6,6 +6,7 @@ const orders = [...Array(10)].map((orders, index) => {
   return {
     customer_id : faker.random.number({ 'min': 1, 'max': 10 }),
     status : faker.lorem.word("accept"),
+    status: faker.random.arrayElement(["accepted", "sending", "done", "failure"]),
     driver_id : faker.random.number({ 'min': 1, 'max': 10 }),
     created_at: faker.date.recent(),
     updated_at: faker.date.recent()
