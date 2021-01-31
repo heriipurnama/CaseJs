@@ -7,4 +7,4 @@ module.exports = async function (app) {
     a(app)
 
   
-  }
+}

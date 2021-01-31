@@ -3,17 +3,12 @@
 const faker = require('faker')
 faker.locale = "id_ID";
 
-
-const publisers = [...Array(10)].map((publiser, index) => {
+const products = [...Array(10)].map((product, index) => {
   return {
-    id: index +1,
-    name : faker.company.companyName(),
-    address : faker.address.streetName(),
-    email : faker.internet.email(),
-    phone : faker.random.number(),
-    website: faker.internet.domainName(),
-    created_at : faker.date.recent(),
-    updated_at : faker.date.recent()
+    name : faker.commerce.productName(),
+    price : faker.finance.amount(1, 100, 2, 'Rp'),
+    created_at: faker.date.recent(),
+    updated_at: faker.date.recent()
   }
 })
 
@@ -28,7 +23,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("publishers", publisers);
+   await queryInterface.bulkInsert("products", products);
   },
 
   down: async (queryInterface, Sequelize) => {

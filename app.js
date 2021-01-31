@@ -1,20 +1,27 @@
 'use strict'
 
-var express = require('express')
-var bodyParser = require('body-parser')
-var app = express()
-var port = process.env.PORT || 4000
+let express = require('express')
+let bodyParser = require('body-parser')
+let app = express()
+let port = process.env.PORT || 4000
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-var routerAuthors = require('./src/router/routerAuthors')
-var routerBooks = require('./src/router/routerBooks')
-var routerPublishers = require('./src/router/routerPublishers')
+// router
+let routerCustomer = require('./src/router/routerCustomer')
+let routerDriver = require('./src/router/routerDriver')
+let routerProduct = require('./src/router/routerProduct')
+let routerOrder = require('./src/router/routerOrder')
 
-routerAuthors(app)
-routerBooks(app)
-routerPublishers(app)
+let routerOrderItem = require('./src/router/routerOrderItem')
+
+routerCustomer(app)
+routerDriver(app)
+routerProduct(app)
+routerOrder(app)
+
+routerOrderItem(app)
 
 app.listen(port)
 console.log(`RESTful API server started on:${port}`)

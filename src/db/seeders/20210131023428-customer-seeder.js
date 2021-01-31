@@ -3,18 +3,17 @@
 const faker = require('faker')
 faker.locale = "id_ID";
 
-const books = [...Array(10)].map((book, index) => {
+const customers = [...Array(10)].map((customer, index) => {
   return {
-    id: index +1,
-    authorId : faker.random.number({ 'min': 1, 'max': 20 }),
-    publisherId : faker.random.number({ 'min': 1, 'max': 1 }),
-    title : faker.random.words(4),
-    price : faker.finance.amount(1, 100, 2, 'Rp'),
-    year : faker.date.past(),
-    created_at : faker.date.recent(),
-    updated_at : faker.date.recent()
+    full_name : faker.name.findName(),
+    username : faker.name.findName(),
+    email : faker.internet.email(),
+    phone_number : faker.phone.phoneNumber(),
+    created_at: faker.date.recent(),
+    updated_at: faker.date.recent()
   }
 })
+
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -27,7 +26,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("books", books);
+   await queryInterface.bulkInsert("customers", customers);
   },
 
   down: async (queryInterface, Sequelize) => {

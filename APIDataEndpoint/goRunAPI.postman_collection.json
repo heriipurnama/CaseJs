@@ -1,0 +1,874 @@
+{
+	"info": {
+		"_postman_id": "14fbb281-14e3-42ed-9e44-1c13c4fedadc",
+		"name": "goRunAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "127.0.0.1:4000/customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/customers",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/customers/getCustomerById/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/customers/getCustomerById/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"customers",
+								"getCustomerById",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/customers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": {\n        \"attributes\": {\n            \"fullName\": \"heriipurnama\",\n            \"username\": \"heriipurnama\",\n            \"email\": \"heriipurnama@gmail.com\",\n            \"phoneNumber\": \"081329112602\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/customers/addNewCustomer",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"customers",
+								"addNewCustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/customers/updateCustomer/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"fullName\": \"heriipurnamaSaja\",\n    \"username\": \"heriipurnamaSaja\",\n    \"email\": \"heriipurnama@gmail.com\",\n    \"phoneNumber\": \"081329112602\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/customers/updateCustomer/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"customers",
+								"updateCustomer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/customers/deleteCustomer/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/customers/deleteCustomer/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"customers",
+								"deleteCustomer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/orders/ [multiple order]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": {\n        \"attributes\": {\n            \"customerId\": 3,\n            \"driverId\": 5,\n            \"order_detail\": [\n                {\n                    \"product_id\": 1,\n                    \"quantity\": 1\n                },\n                {\n                    \"product_id\": 1,\n                    \"quantity\": 1\n                }\n            ]\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/orders/addNewOrders",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orders",
+								"addNewOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/customers [customer update order status]",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": {\n        \"attributes\": {\n            \"customerId\": 9,\n            \"orderId\": 5\n        },\n        \"status\" : \"Failure\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/customers/updateStatusOrderCustomer",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"customers",
+								"updateStatusOrderCustomer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "drivers",
+			"item": [
+				{
+					"name": "127.0.0.1:4000/drivers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/drivers",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/drivers/getDriversById/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/drivers/getDriversById/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"drivers",
+								"getDriversById",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/drivers/addNewDrivers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": {\n        \"attributes\": {\n            \"fullName\": \"heriipurnamaSAJA\",\n            \"phoneNumber\": \"081329112602\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/drivers/addNewDrivers",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"drivers",
+								"addNewDrivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/drivers/updateDrivers/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"fullName\": \"heriipurnama\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/drivers/updateDrivers/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"drivers",
+								"updateDrivers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/drivers/deleteDrivers/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/drivers/deleteDrivers/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"drivers",
+								"deleteDrivers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/drivers [driver can update status]",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"Sending\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/drivers/updateStatusOrderDrivers/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"drivers",
+								"updateStatusOrderDrivers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "127.0.0.1:4000/products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/products",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/products/getProductsById/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/products/getProductsById/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"products",
+								"getProductsById",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/products/addNewProducts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"name\": \"LUX\",\n    \"price\": \"Rp25.16\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/products/addNewProducts",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"products",
+								"addNewProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/products/updateProducts/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"name\": \"GIV\",\n    \"price\": \"Rp25.16\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/products/updateProducts/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"products",
+								"updateProducts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/products/deleteProducts/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/products/deleteProducts/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"products",
+								"deleteProducts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "127.0.0.1:4000/orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/orders",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/orders/getOrdersById/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/orders/getOrdersById/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orders",
+								"getOrdersById",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/orders [multiple order]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": {\n        \"attributes\": {\n            \"customerId\": 2,\n            \"driverId\": 5,\n            \"order_detail\": [\n                {\n                    \"product_id\": 1,\n                    \"quantity\": 1\n                },\n                {\n                    \"product_id\": 1,\n                    \"quantity\": 1\n                }\n            ]\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/orders/addNewOrders",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orders",
+								"addNewOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/orders/updateOrders/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"customerId\": 1,\n    \"status\": \"sending\",\n    \"driverId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/orders/updateOrders/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orders",
+								"updateOrders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/orders/deleteOrders/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/orders/deleteOrders/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orders",
+								"deleteOrders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order_items",
+			"item": [
+				{
+					"name": "127.0.0.1:4000/orderItems",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/orderItems",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orderItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/orderItems/getOrdersById/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/orderItems/getOrdersById/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orderItems",
+								"getOrdersById",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/orderItems/addNewOrders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"orderId\": \"9\",\n     \"productId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/orderItems/addNewOrders",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orderItems",
+								"addNewOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/orderItems/updateOrders/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"orderId\": \"10\",\n     \"productId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/orderItems/updateOrders/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orderItems",
+								"updateOrders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/orderItems/deleteOrders/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/orderItems/deleteOrders/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"orderItems",
+								"deleteOrders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
