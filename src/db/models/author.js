@@ -13,9 +13,26 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       // one to many
+      // author.hasMany(models.book, {
+      //   foreignKey: 'author_id'
+      // }),
+      // author.belongsToMany(models.book, {
+      //   foreignKey: 'author_id'
+      // })
+
       author.hasMany(models.book, {
-        foreignKey: 'author_id'
-      })
+        foreignKey: {
+          name: "author_id",
+        },
+        as: "books",
+      });
+
+      author.belongsToMany(models.publisher, {
+        through: "book",
+        foreignKey: {
+          name: "author_id",
+        }, as : "publishers"
+      });
 
     }
   };

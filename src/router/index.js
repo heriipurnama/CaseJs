@@ -1,10 +1,6 @@
 `use stric`
-
-module.exports = async function (app) {
-
-
-    const a = require('./routerAuthors')
-    a(app)
-
-  
-  }
+module.exports = {
+    author: require("./routerAuthors"),
+    book: require("./routerBooks"),
+    publisher: require("./routerPublishers")
+  };

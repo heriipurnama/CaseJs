@@ -1,13 +1,15 @@
-'use strict'
+"use strict";
 
-module.exports = async function (app) {
-  const authors = require('../controller/AuthorController')
+const express = require("express");
+const router = express.Router();
 
-  app.get('/authors',authors.getAllDatas)
-  app.get('/authors/getById/:id',authors.getById)
-  app.post('/authors',authors.createAuthor)
-  app.put('/authors/getById/:id',authors.updateAuthor)
+const { author: AuthorController } = require("../controller");
 
-  app.delete('/authors/getById/:id',authors.deleteAuthors)
+router.get("/", AuthorController.getAllDatas);
+router.get("/:id", AuthorController.getById);
+router.post("/", AuthorController.createAuthor);
+router.put("/:id", AuthorController.updateAuthor);
 
-}
+router.delete("/:id", AuthorController.deleteAuthors);
+
+module.exports = router;

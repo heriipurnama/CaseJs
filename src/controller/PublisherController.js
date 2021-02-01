@@ -1,28 +1,27 @@
-'use strict'
+"use strict";
 
-let { publisher }= require('../db/models'); 
-let baseResponse = require('../utils/helper')
+let { publisher } = require("../db/models");
+let baseResponse = require("../utils/helper");
 
 class PublisherController {
-
   static async getAllDatas(req, res) {
     try {
-        const payload = await publisher.findAll();
-        baseResponse({ message: "publishers retrieved", data: payload })(res);
+      const payload = await publisher.findAll();
+      baseResponse({ message: "publishers retrieved", data: payload })(res);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
 
-  static async getAllBook(req, res) {
+  static async getAllPublisher(req, res) {
     try {
       const payload = await publisher.findAll({
-        include : 'authors'
+        include: "authors",
       });
       baseResponse({ message: "publishers retrieved", data: payload })(res);
-  } catch (error) {
+    } catch (error) {
       console.log(error);
-  }
+    }
   }
 
   static async getById(req, res) {
@@ -42,7 +41,7 @@ class PublisherController {
         address: req.body.address,
         email: req.body.email,
         phone: req.body.phone,
-        website: req.body.website
+        website: req.body.website,
       });
       baseResponse({ message: "publishers created", data: payload })(res);
     } catch (error) {
@@ -52,42 +51,43 @@ class PublisherController {
 
   static async updatePublisher(req, res) {
     try {
-        const authorDetails = await publisher.update({
-            name: req.body.name,
-            address: req.body.addres,
-            email: req.body.email,
-            phone: req.body.phone,
-            website: req.body.website
+      const authorDetails = await publisher.update(
+        {
+          name: req.body.name,
+          address: req.body.addres,
+          email: req.body.email,
+          phone: req.body.phone,
+          website: req.body.website,
         },
         { where: { id: req.params.id } }
-    );
-        if (!authorDetails) {
-                baseResponse({ message: "book not found", data: authorDetails })( res,404);
-            }
-                baseResponse({ message: "book updated", data: authorDetails })(res, 200);
-    }
-    catch(error) {
-        console.log(error);
+      );
+      if (!authorDetails) {
+        baseResponse({ message: "book not found", data: authorDetails })(
+          res,
+          404
+        );
+      }
+      baseResponse({ message: "book updated", data: authorDetails })(res, 200);
+    } catch (error) {
+      console.log(error);
     }
   }
-
 
   static async deletePublisher(req, res) {
     try {
-        const datas = await publisher.destroy({
-            where: {
-                id: req.params.id,
-            },
-        });
-        if (datas) {
-            baseResponse({ message: "book deleted", data: datas })(res, 200);
-        }
-            baseResponse({ message: "book not found", data: datas })(res, 404);
-    }catch (error) {
-        console.log(error);
+      const datas = await publisher.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      if (datas) {
+        baseResponse({ message: "book deleted", data: datas })(res, 200);
+      }
+      baseResponse({ message: "book not found", data: datas })(res, 404);
+    } catch (error) {
+      console.log(error);
     }
   }
-
 }
 
-module.exports = PublisherController
+module.exports = PublisherController;

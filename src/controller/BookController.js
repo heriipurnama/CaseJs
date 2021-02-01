@@ -1,19 +1,17 @@
-'use strict'
+"use strict";
 
-let { author, book, publisher }= require('../db/models'); 
-let baseResponse = require('../utils/helper')
+let { author, book, publisher } = require("../db/models");
+let baseResponse = require("../utils/helper");
 
 class BookController {
-
   static async getAllDatas(req, res) {
     try {
-        const payload = await book.findAll();
-        baseResponse({ message: "books retrieved", data: payload })(res);
+      const payload = await book.findAll();
+      baseResponse({ message: "books retrieved", data: payload })(res);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
-
 
   static async getById(req, res) {
     try {
@@ -28,11 +26,11 @@ class BookController {
     // seq.
     try {
       const payload = await book.create({
-        author_id : req.body.authorId,
-        publisher_id : req.body.publisherId,
+        author_id: req.body.authorId,
+        publisher_id: req.body.publisherId,
         title: req.body.title,
         price: req.body.price,
-        year: req.body.year
+        year: req.body.year,
       });
       baseResponse({ message: "books created", data: payload })(res);
     } catch (error) {
@@ -42,84 +40,93 @@ class BookController {
 
   static async updateBook(req, res) {
     try {
-        const authorDetails = await book.update({
-          author_id : req.body.authorId,
-          publisher_id : req.body.publisherId,
+      const authorDetails = await book.update(
+        {
+          author_id: req.body.authorId,
+          publisher_id: req.body.publisherId,
           title: req.body.title,
           price: req.body.price,
-          year: req.body.year
+          year: req.body.year,
         },
         { where: { id: req.params.id } }
-    );
-        if (!authorDetails) {
-                baseResponse({ message: "book not found", data: authorDetails })( res,404);
-            }
-                baseResponse({ message: "book updated", data: authorDetails })(res, 200);
-    }
-    catch(error) {
-        console.log(error);
+      );
+      if (!authorDetails) {
+        baseResponse({ message: "book not found", data: authorDetails })(
+          res,
+          404
+        );
+      }
+      baseResponse({ message: "book updated", data: authorDetails })(res, 200);
+    } catch (error) {
+      console.log(error);
     }
   }
 
-
   static async deleteBooks(req, res) {
     try {
-        const datas = await book.destroy({
-            where: {
-                id: req.params.id,
-            },
-        });
-        if (datas) {
-            baseResponse({ message: "book deleted", data: datas })(res, 200);
-        }
-            baseResponse({ message: "book not found", data: datas })(res, 404);
-    }catch (error) {
-        console.log(error);
+      const datas = await book.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      if (datas) {
+        baseResponse({ message: "book deleted", data: datas })(res, 200);
+      }
+      baseResponse({ message: "book not found", data: datas })(res, 404);
+    } catch (error) {
+      console.log(error);
     }
   }
 
   // relations
   static async getBookAuthor(req, res) {
-    const payload = await book.findAll({
-        include: [{
-            model: author,
-            where: {
-                id: req.params.id,
-            },
-        }],   
-    })
-    response({ message: "get book with author success", data: payload})(res, 200);
-}
+    const data = await author.findOne(
+      {
+        include: [
+          {
+            model: publisher,
+            as: "publishers",
+            through: { attributes: [] },
+          },
+        ],
+      },
+      { where: { id: req.params.id } }
+    );
+    baseResponse({ message: "get book with author success", data: data })(
+      res,
+      200
+    );
+  }
 
-static async getAuthorPublisher(req, res) {
+  static async getAuthorPublisher(req, res) {
     const payload = await publisher.findAll({
-        include: {
-            model: book,
-            where: {
-                id: req.params.id
-            },
-            include: {
-                model: author,
-            },
+      include: {
+        model: book,
+        where: {
+          id: req.params.id,
         },
-    })
-    response({ message: "get publisher with author success", data: payload})(res, 200);
-}
+        include: {
+          model: author,
+        },
+      },
+    });
+    baseResponse({ message: "get publisher with author success", data: payload })(
+      res,
+      200
+    );
+  }
 
-static async getBookSpesific(req, res) {
-    const sort = req.query.sort_by
-    const order = req.query.order_by
+  static async getBookSpesific(req, res) {
+    const sort = req.query.sort_by;
+    const order = req.query.order_by;
 
-    if(sort === req.query.sort_by && order === req.query.order_by){
-        const payload = await book.findAll({
-            order: [
-                [sort, order],
-            ],
-        })
-        response({ message: "retrieved user", data: payload})(res, 200);
+    if (sort === req.query.sort_by && order === req.query.order_by) {
+      const payload = await book.findAll({
+        order: [[sort, order]],
+      });
+      baseResponse({ message: "retrieved user", data: payload })(res, 200);
     }
+  }
 }
 
-}
-
-module.exports = BookController
+module.exports = BookController;
