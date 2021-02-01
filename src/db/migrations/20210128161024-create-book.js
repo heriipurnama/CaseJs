@@ -23,6 +23,9 @@ module.exports = {
       year: {
         type: Sequelize.DATE
       },
+      cover_book: {
+        type: Sequelize.STRING
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE

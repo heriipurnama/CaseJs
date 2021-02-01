@@ -1,7 +1,7 @@
 "use strict";
 
 let { author, book, publisher } = require("../db/models");
-let baseResponse = require("../utils/helper");
+let baseResponse = require("../helpers/response");
 
 class BookController {
   static async getAllDatas(req, res) {
@@ -129,7 +129,7 @@ class BookController {
   }
 
   static async uploadCover(req, res){
-    return baseResponse({ message: "book upload" })(res, 200);
+    return baseResponse({ message: "book upload succes" })(res, 200);
   }
 }
 

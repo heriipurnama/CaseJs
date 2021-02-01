@@ -1,7 +1,7 @@
 'use strict'
 
 let { author }= require('../db/models'); 
-let baseResponse = require('../utils/helper')
+let baseResponse = require('../helpers/response')
 
 class AuthorController {
 
@@ -72,7 +72,10 @@ class AuthorController {
         console.log(error);
     }
   }
-
+  
+  static async uploadPhoto(req, res){
+    return baseResponse({ message: "photo upload succes" })(res, 200);
+  }
 }
 
 module.exports = AuthorController

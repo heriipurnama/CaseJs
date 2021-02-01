@@ -5,10 +5,10 @@ faker.locale = "id_ID";
 
 const authors = [...Array(10)].map((author, index) => {
   return {
-    id: index +1,
-    first_name : faker.name.findName(),
-    last_name : faker.name.findName(),
+    first_name : faker.name.firstName(),
+    last_name : faker.name.lastName(),
     email : faker.internet.email(),
+    photo : faker.image.people(),
     created_at : faker.date.recent(),
     updated_at : faker.date.recent()
   }

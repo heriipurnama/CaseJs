@@ -6,7 +6,6 @@ faker.locale = "id_ID";
 
 const publisers = [...Array(10)].map((publiser, index) => {
   return {
-    id: index +1,
     name : faker.company.companyName(),
     address : faker.address.streetName(),
     email : faker.internet.email(),
@@ -28,7 +27,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("publishers", publisers);
+  await queryInterface.bulkInsert("publishers", publisers);
   },
 
   down: async (queryInterface, Sequelize) => {

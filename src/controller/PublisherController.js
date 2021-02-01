@@ -1,7 +1,7 @@
 "use strict";
 
 let { publisher } = require("../db/models");
-let baseResponse = require("../utils/helper");
+let baseResponse = require("../helpers/response");
 
 class PublisherController {
   static async getAllDatas(req, res) {

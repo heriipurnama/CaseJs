@@ -1,30 +1,42 @@
 "use strict";
 
 const express = require("express");
-const router = express.Router();
-
-const { book: BookController } = require("../controller");
-// const routers = require("./routerAuthors");
-const uploadPhoto = require("../midllewares/upload-photo");
+const routers = express.Router();
 const multer = require("multer");
 
-router.get("/", BookController.getAllDatas);
-router.get("/:id", BookController.getById);
-router.post("/", BookController.createBook);
-//router.put("/:id", BookController.updateBook);
+const { book: BookController } = require("../controller");
+const storageCoverBook = require("../middleware/uploadCoverBook");
+const imageFilter = require("../helpers/fileFilter");
 
-router.delete("/:id", BookController.deleteBooks);
+const maxSize = 1 * 800 * 800; // for 800
 
-router.get("/bookAuthor/:id", BookController.getBookAuthor);
-router.get("/authorPublisher/:id", BookController.getAuthorPublisher);
-router.get("/bookSpesific", BookController.getBookSpesific);
+routers
+  .route("/")
+  .get(BookController.getAllDatas)
+  .post(BookController.createBook);
 
-router.put(
-  "/uploadBook/:id",
-  multer({ storage: uploadPhoto }).single("photo"),
-  BookController.uploadCover
-);
+routers
+  .route("/:id")
+  .get(BookController.getById)
+  .delete(BookController.deleteBooks)
+  .put(BookController.updateBook);
 
-module.exports = router;
+routers
+  .route("/bookAuthor/:id")
+  .get(BookController.getBookAuthor);
 
-// via 
+routers
+  .route("/authorPublisher/:id")
+  .get(BookController.getAuthorPublisher);
+
+routers
+  .route("/bookSpesific")
+  .get( BookController.getBookSpesific);
+
+routers
+  .route("/uploadBook/:id")
+  .put( multer({ storage: storageCoverBook, fileFilter:imageFilter, limits: { fileSize: maxSize }})
+       .single("photo"), BookController.uploadCover
+   );
+
+module.exports = routers;
