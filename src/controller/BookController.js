@@ -127,6 +127,10 @@ class BookController {
       baseResponse({ message: "retrieved user", data: payload })(res, 200);
     }
   }
+
+  static async uploadCover(req, res){
+    return baseResponse({ message: "book upload" })(res, 200);
+  }
 }
 
 module.exports = BookController;

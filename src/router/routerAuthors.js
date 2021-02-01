@@ -1,15 +1,25 @@
 "use strict";
 
 const express = require("express");
-const router = express.Router();
+const routers = express.Router();
 
 const { author: AuthorController } = require("../controller");
 
-router.get("/", AuthorController.getAllDatas);
-router.get("/:id", AuthorController.getById);
-router.post("/", AuthorController.createAuthor);
-router.put("/:id", AuthorController.updateAuthor);
+routers
+  .route("/")
+  .get(AuthorController.getAllDatas)
+  .post(AuthorController.createAuthor);
 
-router.delete("/:id", AuthorController.deleteAuthors);
+routers
+  .route("/:id")
+  .get(AuthorController.getById)
+  .put(AuthorController.updateAuthor)
+  .delete(AuthorController.deleteAuthors);
 
-module.exports = router;
+// router.get("/", AuthorController.getAllDatas);
+// router.get("/:id", AuthorController.getById);
+// router.post("/", AuthorController.createAuthor)
+// router.put("/:id", AuthorController.updateAuthor);
+// router.delete("/:id", AuthorController.deleteAuthors);
+
+module.exports = routers;
