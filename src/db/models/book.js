@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     price: DataTypes.STRING,
     year: DataTypes.DATE,
+    cover_book: DataTypes.STRING,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {

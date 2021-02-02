@@ -129,7 +129,21 @@ class BookController {
   }
 
   static async uploadCover(req, res){
-    return baseResponse({ message: "book upload succes" })(res, 200);
+    try {
+      let path = "htttp://127.0.0.1:4000/CaseJs/public/upload/books/";
+      let fileName = req.file.filename;
+      let resultPathFileName = path + fileName;
+    
+      const datas = await book.update(
+        {
+          cover_book : resultPathFileName
+        },
+        { where: { id: req.params.id } }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    return baseResponse({ message: "cover book upload succes" })(res, 200);
   }
 }
 

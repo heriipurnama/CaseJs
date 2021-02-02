@@ -1,16 +1,16 @@
-'use strict'
+"use strict";
+const path = require("path");
 
-let { author }= require('../db/models'); 
-let baseResponse = require('../helpers/response')
+let { author } = require("../db/models");
+let baseResponse = require("../helpers/response");
 
 class AuthorController {
-
   static async getAllDatas(req, res) {
     try {
-        const payload = await author.findAll();
-        baseResponse({ message: "authors retrieved", data: payload })(res);
+      const payload = await author.findAll();
+      baseResponse({ message: "authors retrieved", data: payload })(res);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
 
@@ -39,43 +39,61 @@ class AuthorController {
 
   static async updateAuthor(req, res) {
     try {
-        const authorDetails = await author.update({
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            email: req.body.email,
+      const authorDetails = await author.update(
+        {
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          email: req.body.email,
         },
         { where: { id: req.params.id } }
-    );
-        if (!authorDetails) {
-                baseResponse({ message: "author not found", data: authorDetails })( res,404);
-            }
-                baseResponse({ message: "author updated", data: authorDetails })(res, 200);
-    }
-    catch(error) {
-        console.log(error);
+      );
+      if (!authorDetails) {
+        baseResponse({ message: "author not found", data: authorDetails })(
+          res,
+          404
+        );
+      }
+      baseResponse({ message: "author updated", data: authorDetails })(
+        res,
+        200
+      );
+    } catch (error) {
+      console.log(error);
     }
   }
-
 
   static async deleteAuthors(req, res) {
     try {
-        const datas = await author.destroy({
-            where: {
-                id: req.params.id,
-            },
-        });
-        if (datas) {
-            baseResponse({ message: "author deleted", data: datas })(res, 200);
-        }
-        baseResponse({ message: "author not found", data: datas })(res, 404);
-    }catch (error) {
-        console.log(error);
+      const datas = await author.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      if (datas) {
+        baseResponse({ message: "author deleted", data: datas })(res, 200);
+      }
+      baseResponse({ message: "author not found", data: datas })(res, 404);
+    } catch (error) {
+      console.log(error);
     }
   }
-  
-  static async uploadPhoto(req, res){
+
+  static async uploadPhoto(req, res) {
+    try {
+      let path = "htttp://127.0.0.1:4000/CaseJs/public/upload/authors/";
+      let fileName = req.file.filename;
+      let resultPathFileName = path + fileName;
+      const datas = await author.update(
+        {
+          photo: resultPathFileName
+        },
+        { where: { id: req.params.id } }
+      );
+    } catch (error) {
+      console.log(error);
+    }
     return baseResponse({ message: "photo upload succes" })(res, 200);
   }
 }
 
-module.exports = AuthorController
+module.exports = AuthorController;
