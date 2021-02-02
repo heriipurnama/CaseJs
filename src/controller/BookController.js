@@ -128,7 +128,7 @@ class BookController {
     }
   }
 
-  static async uploadCover(req, res){
+  static async uploadCover(req, res, next){
     try {
       let path = "public/upload/books/";
       let fileName = req.file.filename;
@@ -141,7 +141,8 @@ class BookController {
         { where: { id: req.params.id } }
       );
     } catch (error) {
-      console.log(error);
+      res.status(400);
+      next(err);
     }
     return baseResponse({ message: "cover book upload succes" })(res, 200);
   }

@@ -23,7 +23,7 @@ class AuthorController {
     }
   }
 
-  static async createAuthor(req, res) {
+  static async createAuthor(req, res, next) {
     // seq.
     try {
       const payload = await author.create({
@@ -33,7 +33,8 @@ class AuthorController {
       });
       baseResponse({ message: "authors created", data: payload })(res);
     } catch (error) {
-      console.log(error);
+      res.status(422);
+      next(err);
     }
   }
 
@@ -78,7 +79,7 @@ class AuthorController {
     }
   }
 
-  static async uploadPhoto(req, res) {
+  static async uploadPhoto(req, res, next) {
     try {
       let path = "public/upload/authors/";
       let fileName = req.file.filename;
@@ -90,7 +91,8 @@ class AuthorController {
         { where: { id: req.params.id } }
       );
     } catch (error) {
-      console.log(error);
+      res.status(400);
+      next(err);
     }
     return baseResponse({ message: "photo upload succes" })(res, 200);
   }
