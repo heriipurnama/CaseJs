@@ -80,7 +80,7 @@ class AuthorController {
 
   static async uploadPhoto(req, res) {
     try {
-      let path = "htttp://127.0.0.1:4000/CaseJs/public/upload/authors/";
+      let path = "public/upload/authors/";
       let fileName = req.file.filename;
       let resultPathFileName = path + fileName;
       const datas = await author.update(

@@ -130,7 +130,7 @@ class BookController {
 
   static async uploadCover(req, res){
     try {
-      let path = "htttp://127.0.0.1:4000/CaseJs/public/upload/books/";
+      let path = "public/upload/books/";
       let fileName = req.file.filename;
       let resultPathFileName = path + fileName;
     
