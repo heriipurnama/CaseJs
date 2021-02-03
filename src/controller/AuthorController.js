@@ -4,7 +4,6 @@ const path = require("path");
 const { author } = require("../db/models");
 const baseResponse = require("../helpers/response");
 
-
 class AuthorController {
   static async getAllDatas(req, res, next) {
     try {
@@ -21,7 +20,7 @@ class AuthorController {
       const payload = await author.findByPk(req.params.id);
       baseResponse({ message: "authors retrieved", data: payload })(res);
     } catch (error) {
-      res.status(422);
+      res.status(400);
       next(error);
     }
   }
@@ -36,12 +35,12 @@ class AuthorController {
       });
       baseResponse({ message: "authors created", data: payload })(res);
     } catch (error) {
-      res.status(422);
-      next(err);
+      res.status(400);
+      next(error);
     }
   }
 
-  static async updateAuthor(req, res) {
+  static async updateAuthor(req, res, next) {
     try {
       const authorDetails = await author.update(
         {
@@ -62,11 +61,12 @@ class AuthorController {
         200
       );
     } catch (error) {
-      console.log(error);
+      res.status(400);
+      next(error);
     }
   }
 
-  static async deleteAuthors(req, res) {
+  static async deleteAuthors(req, res, next) {
     try {
       const datas = await author.destroy({
         where: {
@@ -78,7 +78,8 @@ class AuthorController {
       }
       baseResponse({ message: "author not found", data: datas })(res, 404);
     } catch (error) {
-      console.log(error);
+      res.status(400);
+      next(error);
     }
   }
 
@@ -89,7 +90,7 @@ class AuthorController {
       let resultPathFileName = path + fileName;
       const datas = await author.update(
         {
-          photo: resultPathFileName
+          photo: resultPathFileName,
         },
         { where: { id: req.params.id } }
       );

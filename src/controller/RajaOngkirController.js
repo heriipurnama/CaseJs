@@ -1,11 +1,10 @@
 "use strict";
-require('dotenv').config()
+require("dotenv").config();
 
 const axios = require("axios").default;
 let baseResponse = require("../helpers/responseAPIExt");
 const APIKey = process.env.APIKEYRAJAONGKIR;
 const urlAPI = process.env.APIRAJAONGKIR;
-
 
 class RajaOngkirController {
   static async getDataCost(req, res, next) {
@@ -52,9 +51,13 @@ class RajaOngkirController {
 }
 
 function err(error, res) {
-    let errorBody = error.response.data.rajaongkir.status;
-   const result = { status:"succes", error: errorBody.code, message: errorBody.description, stack:error.stack }
-   return res.status(errorBody.code).json(result);
-  
+  let errorBody = error.response.data.rajaongkir.status;
+  const result = {
+    status: "succes",
+    error: errorBody.code,
+    message: errorBody.description,
+    stack: error.stack,
+  };
+  return res.status(errorBody.code).json(result);
 }
 module.exports = RajaOngkirController;

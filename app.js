@@ -32,7 +32,7 @@ const logger2 = (res, req, next) => {
 
 
 app.use(cors());
-// app.use(logMorgan);
+app.use(logMorgan);
 // app.use(loggerMiddleware);
 app.use("/api/v1", routers);
 
