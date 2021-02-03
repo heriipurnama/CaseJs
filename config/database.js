@@ -7,6 +7,7 @@ module.exports = {
     "database" : process.env.DBNAME,
     "host" : process.env.DBHOST,
     "dialect" : process.env.DBDIALECT, // untuk default port 5432
-    "port" : process.env.DBPORT // untuk custom port
+    "port" : process.env.DBPORT, // untuk custom port
+    "logging": false
   }
 }

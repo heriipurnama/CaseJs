@@ -5,21 +5,23 @@ let { author } = require("../db/models");
 let baseResponse = require("../helpers/response");
 
 class AuthorController {
-  static async getAllDatas(req, res) {
+  static async getAllDatas(req, res, next) {
     try {
       const payload = await author.findAll();
       baseResponse({ message: "authors retrieved", data: payload })(res);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      res.status(422);
+      next(err);
     }
   }
 
-  static async getById(req, res) {
+  static async getById(req, res, next) {
     try {
       const payload = await author.findByPk(req.params.id);
       baseResponse({ message: "authors retrieved", data: payload })(res);
     } catch (error) {
-      console.log(error);
+      res.status(422);
+      next(error);
     }
   }
 

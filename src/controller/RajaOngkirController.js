@@ -17,8 +17,8 @@ class RajaOngkirController {
       });
       baseResponse({ message: "data retrieved", data: data.data })(res);
     } catch (error) {
-      res.status(403);
-      next(err);
+      res.status(400);
+      next(error);
     }
   }
 
@@ -31,8 +31,8 @@ class RajaOngkirController {
       });
       baseResponse({ message: "data retrieved", data: data.data })(res);
     } catch (error) {
-      res.status(403);
-      next(err);
+      res.status(400);
+      next(error);
     }
   }
 
@@ -44,17 +44,17 @@ class RajaOngkirController {
         },
       });
       baseResponse({ message: "data retrieved", data: data.data })(res);
-    } catch (error) {
-      res.status(403);
+    } catch (err) {
+      res.status(400);
       next(err);
     }
   }
 }
 
 function err(error, res) {
-    let _err = error.response.data.rajaongkir.status;
-   const result = { status:"succes", error: _err.code, message: _err.description, stack:error.stack }
-   return res.status(_err.code).json(result);
+    let errorBody = error.response.data.rajaongkir.status;
+   const result = { status:"succes", error: errorBody.code, message: errorBody.description, stack:error.stack }
+   return res.status(errorBody.code).json(result);
   
 }
 module.exports = RajaOngkirController;
