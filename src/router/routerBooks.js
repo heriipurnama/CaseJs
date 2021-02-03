@@ -7,19 +7,20 @@ const multer = require("multer");
 const { book: BookController } = require("../controller");
 const storageCoverBook = require("../middleware/uploadCoverBook");
 const imageFilter = require("../helpers/fileFilter");
+const { bookValidationRules, validateBook } = require('../middleware/ValidatorBook')
 
 const maxSize = 1 * 800 * 800; // for 800
 
 routers
   .route("/")
   .get(BookController.getAllDatas)
-  .post(BookController.createBook);
+  .post(bookValidationRules(), validateBook, BookController.createBook);
 
 routers
   .route("/:id")
   .get(BookController.getById)
   .delete(BookController.deleteBooks)
-  .put(BookController.updateBook);
+  .put(bookValidationRules(), validateBook, BookController.updateBook);
 
 routers
   .route("/bookAuthor/:id")

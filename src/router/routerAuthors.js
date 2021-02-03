@@ -9,6 +9,8 @@ const storagePhotoAuthor = require("../middleware/uploadPhoto");
 const imageFilter = require("../helpers/fileFilter");
 const { route } = require("./routerBooks");
 
+const { authorValidationRules, validateAuthor } = require('../middleware/ValidatorAuthor')
+
 const maxSize = 1 * 800 * 800; // for 800
 
 const logger = (res, req, next) => {
@@ -26,9 +28,10 @@ const logger2 = (res, req, next) => {
 
 routers
   .route("/")
-  .get([logger, logger2], AuthorController.getAllDatas)
-  .post(AuthorController.createAuthor);
+  .get(AuthorController.getAllDatas)
+  .post(authorValidationRules(), validateAuthor, AuthorController.createAuthor);
 
+// cek 2 middleware run!
 routers.route("/policy").get([logger, logger2], function (req, res) {
   res.send("Hello!");
 });
@@ -36,7 +39,7 @@ routers.route("/policy").get([logger, logger2], function (req, res) {
 routers
   .route("/:id")
   .get(AuthorController.getById)
-  .put(AuthorController.updateAuthor)
+  .put(authorValidationRules(), validateAuthor, AuthorController.updateAuthor)
   .delete(AuthorController.deleteAuthors);
 
 routers
@@ -49,4 +52,5 @@ routers
     }).single("photo"),
     AuthorController.uploadPhoto
   );
+
 module.exports = routers;

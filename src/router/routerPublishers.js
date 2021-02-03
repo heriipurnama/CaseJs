@@ -4,17 +4,18 @@ const express = require("express");
 const routers = express.Router();
 
 const { publisher: PublisherController } = require("../controller");
+const { publisherValidationRules, validatePublisher } = require('../middleware/ValidatorPublisher')
 
 routers
   .route("/")
   .get(PublisherController.getAllDatas)
-  .post(PublisherController.createPublisher);
+  .post(publisherValidationRules(), validatePublisher, PublisherController.createPublisher);
 
 routers
   .route("/:id")
   .get(PublisherController.getById)
   .delete(PublisherController.deletePublisher)
-  .put(PublisherController.updatePublisher);
+  .put(publisherValidationRules(), validatePublisher, PublisherController.updatePublisher);
 
 
 // router.get("/", PublisherController.getAllDatas);

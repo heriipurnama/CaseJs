@@ -1,8 +1,9 @@
 "use strict";
 const path = require("path");
 
-let { author } = require("../db/models");
-let baseResponse = require("../helpers/response");
+const { author } = require("../db/models");
+const baseResponse = require("../helpers/response");
+
 
 class AuthorController {
   static async getAllDatas(req, res, next) {

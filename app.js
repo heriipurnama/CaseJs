@@ -17,7 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-
 const logger = (res, req, next) => {
  // console.log("logger");
   next()
@@ -32,14 +31,12 @@ const logger2 = (res, req, next) => {
 // app.use(logger2)
 
 
-
 app.use(cors());
 // app.use(logMorgan);
 // app.use(loggerMiddleware);
 app.use("/api/v1", routers);
 
 // app.use(notFound); // middleware handling 404
-
 
 errorHandler.forEach((handler) => app.use(handler));
 
