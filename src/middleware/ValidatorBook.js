@@ -19,10 +19,10 @@ const { check, validationResult } = require("express-validator");
 
 const bookValidationRules = () => {
   return [
-    check("author_id").isNumeric(),
-    check("publisher_id").isNumeric(),
-    check("title ").isAlpha(),
-    check("price").isNumeric(),
+    check("authorId").isNumeric().isLength({ min: 1 }),
+    check("publisherId").isNumeric().isLength({ min: 1 }),
+    check("title").isString().isLength({ min: 1 }),
+    check("price").isNumeric().isLength({ min: 1 }),
     check('year').toDate().custom(async(year, { req }) => {
         const expireDate = new Date('2021-12-31');
         if(expireDate <= req.body.year){

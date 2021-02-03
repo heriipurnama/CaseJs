@@ -30,7 +30,7 @@ class BookController {
         publisher_id: req.body.publisherId,
         title: req.body.title,
         price: req.body.price,
-        year: req.body.year,
+        year: req.body.year
       });
       baseResponse({ message: "books created", data: payload })(res);
     } catch (error) {
