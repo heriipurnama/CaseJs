@@ -1,4 +1,4 @@
-"use strict";
+`use strict`;
 
 const express = require("express");
 const cors = require("cors");
@@ -40,13 +40,11 @@ Sentry.init({
     new Tracing.Integrations.Express({ app }),
   ],
 
-  // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
   tracesSampleRate: 1.0,
 });
 
 app.use(Sentry.Handlers.requestHandler());
-// TracingHandler creates a trace for every incoming request
 app.use(Sentry.Handlers.tracingHandler());
 
 // app.use(logger)

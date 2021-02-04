@@ -16,25 +16,3 @@ const disk = multer.diskStorage({
 module.exports = disk;
 
 // make changge midleware = controller
-
-// // handling error raja ongkir
-// const checkOngkir = async () => {
-//   data = {
-//     origin: "501",
-//     destination: "114",
-//     weight: 900,
-//     courier: "jne",
-//   };
-//   return await axios.post("", data, {
-//     headers: {
-//       key: "",
-//     },
-//   });
-// };
-
-// routers.post("/checkOngkir", async (req, res) => {
-//   const res = await checkOngkir();
-//   res.json(result.data);
-// });
-
-// api.rajaongkir.com/starter/cost

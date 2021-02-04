@@ -1,7 +1,7 @@
 `use strict`;
 
 const { check, validationResult } = require("express-validator");
-const { author, publisher } = require("../db/models");
+const { author, publisher, user } = require("../db/models");
 
 class SchemaValidator {
   // firstName 	STRING 	required, max 20 chars
@@ -15,7 +15,10 @@ class SchemaValidator {
   static author = () => {
     return [
       check("first_name").isAlpha().isLength({ max: 20, min: 1 }),
-      check("last_name").isAlpha().isLength({ max: 30, min:1 }).optional({ nullable: true }),
+      check("last_name")
+        .isAlpha()
+        .isLength({ max: 30, min: 1 })
+        .optional({ nullable: true }),
       check("email")
         .isEmail()
         .custom((email) => {
@@ -77,7 +80,10 @@ class SchemaValidator {
 
   static publisher = () => {
     return [
-      check("name").isAlpha().isLength({ min: 1 }),withMessage("Must be only alphabetical chars"),
+      check("name")
+        .isAlpha()
+        .isLength({ min: 1 })
+        .withMessage("Must be only alphabetical chars"),
       check("address").isAlphanumeric().isLength({ min: 1 }),
       check("email")
         .isEmail()
@@ -96,6 +102,37 @@ class SchemaValidator {
         }),
       check("phone").isMobilePhone(),
       check("website").isAlphanumeric().optional({ nullable: true }),
+    ];
+  };
+
+  // firstName 	STRING 	required, max 30 chars
+  // lastName 	STRING 	required, max 30 chars
+  // email 	    STRING 	required, pattern email, and unique
+  // password 	STRING 	required
+
+  static user = () => {
+    return [
+      check("firstName").isString().isLength({ max: 20, min: 1 }),
+      check("lastName")
+        .isString()
+        .isLength({ max: 30, min: 1 })
+        .optional({ nullable: true }),
+      check("email")
+        .isEmail()
+        .custom((email) => {
+          return user
+            .findOne({
+              where: {
+                email: email,
+              },
+            })
+            .then((user) => {
+              if (user) {
+                return Promise.reject("E-mail already in use");
+              }
+            });
+        }),
+      check("password").isString().isLength({ min: 1 }),
     ];
   };
 

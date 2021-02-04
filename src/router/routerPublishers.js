@@ -10,7 +10,7 @@ routers
   .route("/")
   .get(PublisherController.getAllDatas)
   .post(
-    SchemaValidator.publisher,
+    SchemaValidator.publisher(),
     SchemaValidator.validate,
     PublisherController.createPublisher
   );
@@ -20,7 +20,7 @@ routers
   .get(PublisherController.getById)
   .delete(PublisherController.deletePublisher)
   .put(
-    SchemaValidator.publisher,
+    SchemaValidator.publisher(),
     SchemaValidator.validate,
     PublisherController.updatePublisher
   );
