@@ -1,3 +1,5 @@
+`use strict`
+
 module.exports = {
   author: require("./AuthorController"),
   book: require("./BookController"),
