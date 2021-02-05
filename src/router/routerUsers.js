@@ -30,6 +30,6 @@ routers
 
 routers
     .route("/login/Auth")
-    .get(UserController.login)
+    .post(UserController.login)
 
 module.exports = routers;

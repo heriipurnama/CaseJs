@@ -3,7 +3,6 @@
 const { default: axios } = require("axios");
 const multer = require("multer");
 const path = require("path");
-const routers = require("../router/routerAuthors");
 
 const disk = multer.diskStorage({
   destination: path.join(__dirname, "./../../public/upload/books"),

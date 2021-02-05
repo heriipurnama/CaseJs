@@ -83,7 +83,6 @@ class UserController {
 
   static async login(req, res, next) {
     try {
-
       const payload = await auth(
         user.findOne(
           { where: { first_name: req.body.firstName } },
