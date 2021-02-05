@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
       last_name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
+      photo: DataTypes.STRING,
+      role: DataTypes.STRING
     },
     {
       hooks: {
@@ -41,5 +43,18 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+
+  Object.defineProperty(user.prototype, "entity", {
+    get() {
+      return {
+        id: this.id,
+        firstName: this.first_name,
+        lastName: this.last_name,
+        email: this.email,
+        photo: this.photo,
+        role: this.role
+      };
+    },
+  });
   return user;
 };

@@ -1,14 +1,15 @@
 `use strict`;
 
+const bcrypt = require("bcrypt");
 let { user } = require("../db/models");
 let baseResponse = require("../helpers/response");
-let auth = require("../middleware/Auth");
+const token = require("../helpers/token");
 
 class UserController {
   static async getAllDatas(req, res, next) {
     try {
       const payload = await user.findAll();
-      baseResponse({ message: "user retrieved", data: payload })(res);
+      baseResponse({ message: "user retrieved", data: payload })(res, 200);
     } catch (error) {
       res.status(400);
       next(error);
@@ -32,6 +33,8 @@ class UserController {
         last_name: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
+        photo: req.body.photo,
+        role: req.body.role,
       });
       baseResponse({ message: "user created", data: payload })(res);
     } catch (error) {
@@ -82,32 +85,34 @@ class UserController {
   }
 
   static async login(req, res, next) {
+    let { email, password } = req.body;
     try {
-      const payload = await auth(
-        user.findOne(
-          { where: { first_name: req.body.firstName } },
-          function (err, user) {
-            if (err) {
-              console.log(err);
-             // return done(err);
-            }
-            if (!user) {
-            //  return done(null, false, { message: "Incorrect username." });
-            }
-            if (!user.validPassword(req.body.password)) {
-             // return done(null, false, { message: "Incorrect password." });
-            }
-           // return done(null, user);
-          }
-        )
-      );
-      console.log("payload", payload);
+      let datas = await user.findOne({
+        where: {
+          email: email,
+        },
+      });
 
-    //  baseResponse({ message: "login succesfull", data: payload })(res);
-    } catch (error) {
-      res.status(400);
-      next(error);
+      if (!datas) {
+        throw new Error(`email ${email} doesn't exist!`);
+      }
+      const isPassword = await bcrypt.compareSync(password, datas.password);
+      if (!isPassword) {
+        throw new Error(`Wrong password!`);
+      }
+      return baseResponse({ message: "Login success", data: token(datas) })(
+        res,
+        200
+      );
+    } catch (err) {
+      res.status(403);
+      next(err);
     }
+  }
+
+  static async profile(req, res) {
+    res.status(200);
+    return res.json(req.user.entity);
   }
 }
 

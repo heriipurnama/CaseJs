@@ -10,6 +10,10 @@ const imageFilter = require("../helpers/fileFilter");
 
 const SchemaValidator = require("../middleware/SchemaValidator");
 
+const Auth = require("../middleware/Auth");
+const authorizeAdmin = require("../middleware/authorizeAdmin");
+const authorizeUser = require("../middleware/authorizeUser");
+
 const maxSize = 1 * 800 * 800; // for 800
 
 const logger = (res, req, next) => {
@@ -27,8 +31,9 @@ const logger2 = (res, req, next) => {
 
 routers
   .route("/")
-  .get(AuthorController.getAllDatas)
+  .get(Auth, AuthorController.getAllDatas)
   .post(
+    Auth,
     SchemaValidator.author(),
     SchemaValidator.validate,
     AuthorController.createAuthor
@@ -41,15 +46,17 @@ routers.route("/policy").get([logger, logger2], function (req, res) {
 
 routers
   .route("/:id")
-  .get(AuthorController.getById)
+  .get(Auth, AuthorController.getById)
   .put(
+    Auth,
     SchemaValidator.author(),
     SchemaValidator.validate,
     AuthorController.updateAuthor
   )
-  .delete(AuthorController.deleteAuthors);
+  .delete(Auth,authorizeAdmin, AuthorController.deleteAuthors);
 
 routers.route("/uploadPhoto/:id").put(
+  Auth,
   multer({
     storage: storagePhotoAuthor,
     fileFilter: imageFilter,

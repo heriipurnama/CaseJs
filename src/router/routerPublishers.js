@@ -5,11 +5,14 @@ const routers = express.Router();
 
 const { publisher: PublisherController } = require("../controller");
 const SchemaValidator = require("../middleware/SchemaValidator");
+const Auth = require("../middleware/Auth");
+const authorizeAdmin = require("../middleware/authorizeAdmin");
+const authorizeUser = require("../middleware/authorizeUser");
 
 routers
   .route("/")
-  .get(PublisherController.getAllDatas)
-  .post(
+  .get(Auth, PublisherController.getAllDatas)
+  .post(Auth,
     SchemaValidator.publisher(),
     SchemaValidator.validate,
     PublisherController.createPublisher
@@ -17,9 +20,9 @@ routers
 
 routers
   .route("/:id")
-  .get(PublisherController.getById)
-  .delete(PublisherController.deletePublisher)
-  .put(
+  .get(Auth,PublisherController.getById)
+  .delete(Auth,authorizeAdmin,PublisherController.deletePublisher)
+  .put(Auth,
     SchemaValidator.publisher(),
     SchemaValidator.validate,
     PublisherController.updatePublisher
