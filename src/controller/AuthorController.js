@@ -3,14 +3,23 @@ const path = require("path");
 
 const { author } = require("../db/models");
 const baseResponse = require("../helpers/response");
+const SetRedis = require("../helpers/SetRedis");
 
 class AuthorController {
   static async getAllDatas(req, res, next) {
     try {
       const payload = await author.findAll();
-      baseResponse({ message: "authors retrieved", data: payload })(res);
+   //   SetRedis(req, payload);
+      //  res.json(datas);
+     baseResponse({
+        message: "authors retrieved",
+        data: payload,
+      })(res);
+      SetRedis(req, payload);
+    //  res.json(datas);
+   //   console.log('datas', datas);
     } catch (err) {
-      res.status(422);
+      res.status(400);
       next(err);
     }
   }

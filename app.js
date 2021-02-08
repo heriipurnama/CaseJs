@@ -5,9 +5,6 @@ const cors = require("cors");
 const Sentry = require('@sentry/node');
 const Tracing = require("@sentry/tracing");
 
-const app = express();
-const port = process.env.PORT || 4000;
-
 const routers = require("./src/router");
 const notFound = require("./src/middleware/notFound");
 const logMorgan = require("./src/middleware/logMorgan");
@@ -15,10 +12,13 @@ const errorHandler = require("./src/middleware/errorHandler");
 
 const loggerMiddleware = require("./src/middleware/logger");
 
-const dsn = process.env.SENTRYDSN;
 
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const dsn = process.env.SENTRYDSN;
+const port = process.env.PORT || 4000;
 
 
 const logger = (res, req, next) => {

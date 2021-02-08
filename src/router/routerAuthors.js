@@ -13,6 +13,7 @@ const SchemaValidator = require("../middleware/SchemaValidator");
 const Auth = require("../middleware/Auth");
 const authorizeAdmin = require("../middleware/authorizeAdmin");
 const authorizeUser = require("../middleware/authorizeUser");
+const cache = require("../middleware/Cache");
 
 const maxSize = 1 * 800 * 800; // for 800
 
@@ -31,7 +32,7 @@ const logger2 = (res, req, next) => {
 
 routers
   .route("/")
-  .get(Auth, AuthorController.getAllDatas)
+  .get(Auth, cache, AuthorController.getAllDatas)
   .post(
     Auth,
     SchemaValidator.author(),
@@ -53,7 +54,7 @@ routers
     SchemaValidator.validate,
     AuthorController.updateAuthor
   )
-  .delete(Auth,authorizeAdmin, AuthorController.deleteAuthors);
+  .delete(Auth, authorizeAdmin, AuthorController.deleteAuthors);
 
 routers.route("/uploadPhoto/:id").put(
   Auth,
