@@ -2,8 +2,12 @@
 
 const express = require("express");
 const cors = require("cors");
-const Sentry = require('@sentry/node');
+const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
+
+const cron = require("node-cron");
+const  routerd  = require('bull-board')
+
 
 const routers = require("./src/router");
 const notFound = require("./src/middleware/notFound");
@@ -11,7 +15,7 @@ const logMorgan = require("./src/middleware/logMorgan");
 const errorHandler = require("./src/middleware/errorHandler");
 
 const loggerMiddleware = require("./src/middleware/logger");
-
+const welcoming = require("./src/services/welcoming");
 
 const app = express();
 app.use(express.json());
@@ -20,16 +24,15 @@ app.use(express.urlencoded({ extended: true }));
 const dsn = process.env.SENTRYDSN;
 const port = process.env.PORT || 4000;
 
-
 const logger = (res, req, next) => {
- // console.log("logger");
-  next()
-}
+  // console.log("logger");
+  next();
+};
 
 const logger2 = (res, req, next) => {
- // console.log("logger2");
-  next()
-}
+  // console.log("logger2");
+  next();
+};
 
 Sentry.init({
   dsn: dsn,
@@ -50,17 +53,18 @@ app.use(Sentry.Handlers.tracingHandler());
 // app.use(logger)
 // app.use(logger2)
 
+// Schedule tasks to be run on the server.
+cron.schedule("* 21 * * *", welcoming());
 
 app.use(cors());
 app.use(logMorgan);
 // app.use(loggerMiddleware);
-
+// app.use('/admin/queues', routerd)
 app.use("/api/v1", routers);
 app.use(Sentry.Handlers.errorHandler());
 
 // app.use(notFound); // middleware handling 404
 errorHandler.forEach((handler) => app.use(handler));
-
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
