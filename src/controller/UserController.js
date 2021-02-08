@@ -1,6 +1,10 @@
 `use strict`;
 
 const bcrypt = require("bcrypt");
+const Queue = require("bull");
+const QueueMQ = require("bullmq");
+const { setQueues, BullMQAdapter, BullAdapter } = require("bull-board");
+
 let { user } = require("../db/models");
 let baseResponse = require("../helpers/response");
 const token = require("../helpers/token");
@@ -113,6 +117,16 @@ class UserController {
   static async profile(req, res) {
     res.status(200);
     return res.json(req.user.entity);
+  }
+
+  static async quequeMonit() {
+    const someQueue = new Queue();
+    const someOtherQueue = new Queue();
+
+    setQueues([
+      new BullAdapter(someQueue),
+      new BullAdapter(someOtherQueue),
+    ]);
   }
 }
 
