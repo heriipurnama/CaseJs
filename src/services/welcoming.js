@@ -2,6 +2,8 @@
 
 require("dotenv").config();
 const nodemailer = require("nodemailer");
+const Queue = require("bull");
+
 let { user } = require("../db/models");
 
 const welcoming = async () => {
@@ -29,8 +31,21 @@ const welcoming = async () => {
     to: `${resultEmails}`, // list of receivers
     subject: "Siap - siap ada ledakan Buku Murah !", // Subject line
     text: "Bazar Buku sekarang Dibuka", // plain text body
-    // html: "<b>Hello world?</b>", // html body
   });
+
+  const sendMailQueue = new Queue("sendMail", {
+    redis: {
+      host: "127.0.0.1",
+      port: 6379,
+    },
+  });
+
+  const options = {
+    delay: 60000, // 1 min in ms
+    attempts: 2,
+  };
+  // 2. Adding a Job to the Queue
+  sendMailQueue.add(info, options);
 
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>

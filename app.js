@@ -6,8 +6,6 @@ const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
 
 const cron = require("node-cron");
-const  routerd  = require('bull-board')
-
 
 const routers = require("./src/router");
 const notFound = require("./src/middleware/notFound");
