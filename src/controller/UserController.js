@@ -11,6 +11,7 @@ const token = require("../helpers/token");
 
 const sendEmail = require("../services/welcomingEmail");
 
+
 class UserController {
   static async getAllDatas(req, res, next) {
     try {

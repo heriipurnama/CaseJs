@@ -3,6 +3,8 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 const Queue = require("bull");
+const QueueMQ = require("bullmq");
+const { setQueues, BullMQAdapter, BullAdapter } = require("bull-board");
 
 const welcomingEmail = async (data) => {
   let transporter = nodemailer.createTransport({
@@ -13,7 +15,14 @@ const welcomingEmail = async (data) => {
       pass: process.env.NODEMAILERPASSWD,
     },
   });
- 
+
+  const sendMailQueque = new Queue("sendMail", {
+    redis: {
+      host: "127.0.0.1",
+      port: 6379,
+    },
+  });
+
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"info" <info@kreatiflabs.id>', // sender address
@@ -22,19 +31,20 @@ const welcomingEmail = async (data) => {
     text: `Welcome ${data}`, // plain text body
   });
 
-  const sendMailQueue = new Queue("sendMail", {
-    redis: {
-      host: "127.0.0.1",
-      port: 6379,
-    },
-  });
+  setQueues([new BullAdapter(sendMailQueque)]);
 
   const options = {
     delay: 60000, // 1 min in ms
     attempts: 2,
   };
-  // 2. Adding a Job to the Queue
-  sendMailQueue.add(info, options);
+  sendMailQueque.process(function (job, done) {
+    console.log('job', job);
+    const sendEmail = await info(job)
+    done();
+  });
+  sendMailQueque.add(info);
+
+ 
 
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>

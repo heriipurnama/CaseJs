@@ -6,6 +6,7 @@ const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
 
 const cron = require("node-cron");
+const { router: routerBullBoard } = require('bull-board')
 
 const routers = require("./src/router");
 const notFound = require("./src/middleware/notFound");
@@ -13,7 +14,7 @@ const logMorgan = require("./src/middleware/logMorgan");
 const errorHandler = require("./src/middleware/errorHandler");
 
 const loggerMiddleware = require("./src/middleware/logger");
-const welcoming = require("./src/services/welcoming");
+const CronjobEmail = require("./src/services/CronjobEmail");
 
 const app = express();
 app.use(express.json());
@@ -52,12 +53,12 @@ app.use(Sentry.Handlers.tracingHandler());
 // app.use(logger2)
 
 // Schedule tasks to be run on the server.
-cron.schedule("* 21 * * *", welcoming());
+cron.schedule("* * * * *", CronjobEmail());
 
 app.use(cors());
 app.use(logMorgan);
 // app.use(loggerMiddleware);
-// app.use('/admin/queues', routerd)
+app.use('/admin/queques', routerBullBoard)
 app.use("/api/v1", routers);
 app.use(Sentry.Handlers.errorHandler());
 

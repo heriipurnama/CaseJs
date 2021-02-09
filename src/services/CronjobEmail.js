@@ -3,10 +3,11 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 const Queue = require("bull");
+const { setQueues, BullMQAdapter, BullAdapter } = require("bull-board");
 
 let { user } = require("../db/models");
 
-const welcoming = async () => {
+const CronjobEmail = async () => {
   let transporter = nodemailer.createTransport({
     host: process.env.NODEMAILERHOST,
     port: process.env.NODEMAILERPORT,
@@ -33,7 +34,7 @@ const welcoming = async () => {
     text: "Bazar Buku sekarang Dibuka", // plain text body
   });
 
-  const sendMailQueue = new Queue("sendMail", {
+  const sendMailQueue = new Queue("sendMailCronJob", {
     redis: {
       host: "127.0.0.1",
       port: 6379,
@@ -45,8 +46,17 @@ const welcoming = async () => {
     attempts: 2,
   };
   // 2. Adding a Job to the Queue
-  sendMailQueue.add(info, options);
-
+  sendMailQueue.process(function (job, done) {
+    job.progress(42);
+    done();
+    done(new Error("error transcoding"));
+    done(null, { samplerate: 4800 });
+    throw new Error("Error");
+  });
+  
+  sendMailQueue.add(info);
+  setQueues([new BullAdapter(sendMailQueue)]);
+  
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
@@ -55,4 +65,4 @@ const welcoming = async () => {
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 };
 
-module.exports = welcoming;
+module.exports = CronjobEmail;
