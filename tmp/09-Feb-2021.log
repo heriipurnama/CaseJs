@@ -31,3 +31,4 @@
 [2021-02-09T06:11:36+07:00] "GET /api/v1/users/admin/queue-monitor" - - - - ms
 [2021-02-09T06:11:44+07:00] "GET /api/v1/users/admin/queue-monitor" - - - - ms
 [2021-02-09T09:17:54+07:00] "POST /api/v1/users/auth/signup" 200 314 - 137.553 ms
+[2021-02-09T09:21:51+07:00] "POST /api/v1/users/auth/signup" 200 314 - 150.096 ms

@@ -13,13 +13,13 @@ const welcomingEmail = async (data) => {
       pass: process.env.NODEMAILERPASSWD,
     },
   });
-  console.log('data', data);
+ 
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"info" <info@kreatiflabs.id>', // sender address
     to: `${data}`, // list of receivers
-    subject: "Welcome", // Subject line
-    text: "welcome", // plain text body
+    subject: `Welcome ${data}`, // Subject line
+    text: `Welcome ${data}`, // plain text body
   });
 
   const sendMailQueue = new Queue("sendMail", {
