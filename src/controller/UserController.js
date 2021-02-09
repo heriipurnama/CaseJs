@@ -9,6 +9,8 @@ let { user } = require("../db/models");
 let baseResponse = require("../helpers/response");
 const token = require("../helpers/token");
 
+const sendEmail = require("../services/welcomingEmail");
+
 class UserController {
   static async getAllDatas(req, res, next) {
     try {
@@ -40,6 +42,7 @@ class UserController {
         photo: req.body.photo,
         role: req.body.role,
       });
+      sendEmail(req.body.email);
       baseResponse({ message: "user created", data: payload })(res);
     } catch (error) {
       res.status(400);
@@ -123,10 +126,7 @@ class UserController {
     const someQueue = new Queue();
     const someOtherQueue = new Queue();
 
-    setQueues([
-      new BullAdapter(someQueue),
-      new BullAdapter(someOtherQueue),
-    ]);
+    setQueues([new BullAdapter(someQueue), new BullAdapter(someOtherQueue)]);
   }
 }
 
