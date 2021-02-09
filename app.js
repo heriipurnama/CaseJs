@@ -53,7 +53,7 @@ app.use(Sentry.Handlers.tracingHandler());
 // app.use(logger2)
 
 // Schedule tasks to be run on the server.
-cron.schedule("* * * * *", CronjobEmail());
+// cron.schedule("* * * * *", CronjobEmail());
 
 app.use(cors());
 app.use(logMorgan);

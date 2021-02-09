@@ -3,8 +3,7 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 const Queue = require("bull");
-const QueueMQ = require("bullmq");
-const { setQueues, BullMQAdapter, BullAdapter } = require("bull-board");
+const { setQueues, BullAdapter } = require("bull-board");
 
 const welcomingEmail = async (data) => {
   let transporter = nodemailer.createTransport({
@@ -16,42 +15,36 @@ const welcomingEmail = async (data) => {
     },
   });
 
-  const sendMailQueque = new Queue("sendMail", {
-    redis: {
-      host: "127.0.0.1",
-      port: 6379,
-    },
+  let info = transporter.sendMail({
+    from: '"info" <info@kreatiflabs.id>',
+    to: `${data}`, 
+    subject: `Welcome ${data}`,
+    text: `Welcome ${data}`
   });
 
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: '"info" <info@kreatiflabs.id>', // sender address
-    to: `${data}`, // list of receivers
-    subject: `Welcome ${data}`, // Subject line
-    text: `Welcome ${data}`, // plain text body
-  });
-
-  setQueues([new BullAdapter(sendMailQueque)]);
-
-  const options = {
-    delay: 60000, // 1 min in ms
-    attempts: 2,
-  };
-  sendMailQueque.process(function (job, done) {
-    console.log('job', job);
-    const sendEmail = await info(job)
-    done();
-  });
+  
   sendMailQueque.add(info);
-
- 
-
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  
 };
+
+
+
+const sendMailQueque = new Queue("sendMail", {
+  redis: {
+    host: "127.0.0.1",
+    port: 6379,
+  },
+});
+sendMailQueque.process(async function (job, done) {
+  // console.log('job', job);
+ 
+  done();
+});
+const options = {
+  delay: 60000, // 1 min in ms
+  attempts: 2,
+};
+
+setQueues([new BullAdapter(sendMailQueque)]);
 
 module.exports = welcomingEmail;

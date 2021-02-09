@@ -48,13 +48,13 @@ const CronjobEmail = async () => {
   // 2. Adding a Job to the Queue
   sendMailQueue.process(function (job, done) {
     job.progress(42);
-    done();
+    done(); 
     done(new Error("error transcoding"));
     done(null, { samplerate: 4800 });
     throw new Error("Error");
   });
   
-  sendMailQueue.add(info);
+  sendMailQueue.add(info, options);
   setQueues([new BullAdapter(sendMailQueue)]);
   
   console.log("Message sent: %s", info.messageId);
