@@ -4,20 +4,30 @@ const path = require("path");
 const { author } = require("../db/models");
 const baseResponse = require("../helpers/response");
 const SetRedis = require("../helpers/SetRedis");
+const authCloudinary = require("../middleware/AuthCloudinary");
+
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARYCLOUDNAME,
+  api_key: process.env.CLOUDINARYAPIKEY,
+  api_secret: process.env.CLOUDINARYAPISECRET
+});
 
 class AuthorController {
   static async getAllDatas(req, res, next) {
     try {
       const payload = await author.findAll();
-   //   SetRedis(req, payload);
+      //   SetRedis(req, payload);
       //  res.json(datas);
-     baseResponse({
+      baseResponse({
         message: "authors retrieved",
         data: payload,
       })(res);
       SetRedis(req, payload);
-    //  res.json(datas);
-   //   console.log('datas', datas);
+      //  res.json(datas);
+      //   console.log('datas', datas);
     } catch (err) {
       res.status(400);
       next(err);
@@ -97,15 +107,20 @@ class AuthorController {
       let path = "public/upload/authors/";
       let fileName = req.file.filename;
       let resultPathFileName = path + fileName;
-      const datas = await author.update(
-        {
-          photo: resultPathFileName,
-        },
-        { where: { id: req.params.id } }
-      );
+
+      cloudinary.uploader
+        .upload(resultPathFileName)
+        .then(async (result) => {
+          const datas = await author.update(
+            {
+              photo: result.url,
+            },
+            { where: { id: req.params.id } }
+          );
+        });
     } catch (error) {
       res.status(400);
-      next(err);
+      next(error);
     }
     return baseResponse({ message: "photo upload succes" })(res, 200);
   }

@@ -16,8 +16,9 @@ const maxSize = 1 * 800 * 800; // for 800
 
 routers
   .route("/")
-  .get(Auth,BookController.getAllDatas)
-  .post(Auth,
+  .get(Auth, BookController.getAllDatas)
+  .post(
+    Auth,
     SchemaValidator.book(),
     SchemaValidator.validate,
     BookController.createBook
@@ -25,21 +26,25 @@ routers
 
 routers
   .route("/:id")
-  .get(Auth,BookController.getById)
-  .delete(Auth,authorizeAdmin,BookController.deleteBooks)
-  .put(Auth,
+  .get(Auth, BookController.getById)
+  .delete(Auth, authorizeAdmin, BookController.deleteBooks)
+  .put(
+    Auth,
     SchemaValidator.book(),
     SchemaValidator.validate,
     BookController.updateBook
   );
 
-routers.route("/bookAuthor/:id").get(Auth,BookController.getBookAuthor);
+routers.route("/bookAuthor/:id").get(Auth, BookController.getBookAuthor);
 
-routers.route("/authorPublisher/:id").get(Auth,BookController.getAuthorPublisher);
+routers
+  .route("/authorPublisher/:id")
+  .get(Auth, BookController.getAuthorPublisher);
 
-routers.route("/bookSpesific").get(Auth,BookController.getBookSpesific);
+routers.route("/bookSpesific").get(Auth, BookController.getBookSpesific);
 
-routers.route("/uploadBook/:id").put(Auth,
+routers.route("/uploadBook/:id").put(
+  Auth,
   multer({
     storage: storageCoverBook,
     fileFilter: imageFilter,

@@ -4,6 +4,7 @@ const express = require("express");
 const routers = express.Router();
 const multer = require("multer");
 
+
 const { author: AuthorController } = require("../controller");
 const storagePhotoAuthor = require("../middleware/uploadPhoto");
 const imageFilter = require("../helpers/fileFilter");
@@ -16,6 +17,10 @@ const authorizeUser = require("../middleware/authorizeUser");
 const cache = require("../middleware/Cache");
 
 const maxSize = 1 * 800 * 800; // for 800
+
+
+
+
 
 const logger = (res, req, next) => {
   console.log("loggerRoutes");
@@ -57,7 +62,7 @@ routers
   .delete(Auth, authorizeAdmin, AuthorController.deleteAuthors);
 
 routers.route("/uploadPhoto/:id").put(
-  Auth,
+  // Auth,
   multer({
     storage: storagePhotoAuthor,
     fileFilter: imageFilter,

@@ -2,6 +2,14 @@
 
 let { author, book, publisher } = require("../db/models");
 let baseResponse = require("../helpers/response");
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARYCLOUDNAME,
+  api_key: process.env.CLOUDINARYAPIKEY,
+  api_secret: process.env.CLOUDINARYAPISECRET,
+});
 
 class BookController {
   static async getAllDatas(req, res, next) {
@@ -153,12 +161,14 @@ class BookController {
       let fileName = req.file.filename;
       let resultPathFileName = path + fileName;
 
-      const datas = await book.update(
-        {
-          cover_book: resultPathFileName,
-        },
-        { where: { id: req.params.id } }
-      );
+      cloudinary.uploader.upload(resultPathFileName).then(async (result) => {
+        const datas = await book.update(
+          {
+            cover_book: result.url,
+          },
+          { where: { id: req.params.id } }
+        );
+      });
     } catch (error) {
       res.status(400);
       next(err);
