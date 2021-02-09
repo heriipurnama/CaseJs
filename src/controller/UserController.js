@@ -1,15 +1,13 @@
 `use strict`;
 
 const bcrypt = require("bcrypt");
-const Queue = require("bull");
-const QueueMQ = require("bullmq");
-const { setQueues, BullMQAdapter, BullAdapter } = require("bull-board");
 
 let { user } = require("../db/models");
 let baseResponse = require("../helpers/response");
 const token = require("../helpers/token");
 
-const sendEmail = require("../services/welcomingEmail");
+// const sendEmail = require("../services/welcomingEmail");
+const ServiceQueueSendMail = require("../services/ServiceQueueSendMail")
 
 
 class UserController {
@@ -43,7 +41,7 @@ class UserController {
         photo: req.body.photo,
         role: req.body.role,
       });
-      sendEmail(req.body.email);
+      ServiceQueueSendMail.welcomingEmail(req.body.email);
       baseResponse({ message: "user created", data: payload })(res);
     } catch (error) {
       res.status(400);
@@ -123,12 +121,6 @@ class UserController {
     return res.json(req.user.entity);
   }
 
-  static async quequeMonit() {
-    const someQueue = new Queue();
-    const someOtherQueue = new Queue();
-
-    setQueues([new BullAdapter(someQueue), new BullAdapter(someOtherQueue)]);
-  }
 }
 
 module.exports = UserController;
