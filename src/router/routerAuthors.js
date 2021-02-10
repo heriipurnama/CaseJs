@@ -62,7 +62,7 @@ routers
   .delete(Auth, authorizeAdmin, AuthorController.deleteAuthors);
 
 routers.route("/uploadPhoto/:id").put(
-  // Auth,
+  Auth,
   multer({
     storage: storagePhotoAuthor,
     fileFilter: imageFilter,
