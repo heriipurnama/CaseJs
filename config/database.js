@@ -14,10 +14,14 @@ module.exports = {
         require: true,
         rejectUnauthorized: false
     }
-    }
+    },
+    "migrate": "node_modules/sequelize-cli/lib/sequelize db:migrate",
+    "seed": "sequelize db:seed:all"
   },
   "production" :{
     "dialect" : process.env.DBDIALECT,
-    "use_env_variable":"DATABASE_URL"
+    "use_env_variable":"DATABASE_URL",
+    "migrate": "node_modules/sequelize-cli/lib/sequelize db:migrate",
+    "seed": "sequelize db:seed:all"
   }
 }
