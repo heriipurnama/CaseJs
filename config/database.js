@@ -10,7 +10,7 @@ module.exports = {
     "port" : process.env.DBPORT, // untuk custom port
     "logging": false,
     "dialectOptions": {
-      "ssl": false
+      "ssl": true
     }
   }
 }
