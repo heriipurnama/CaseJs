@@ -32,6 +32,7 @@ routers
   );
 
 routers.route("/auth/signin").post(UserController.login);
+routers.route("/auth/signout").get(UserController.signout);
 
 routers.route("/auth/profile").get(Auth, UserController.profile);
 

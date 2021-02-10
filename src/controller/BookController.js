@@ -15,6 +15,7 @@ class BookController {
   static async getAllDatas(req, res, next) {
     try {
       const payload = await book.findAll();
+      
       baseResponse({ message: "books retrieved", data: payload })(res);
     } catch (error) {
       res.status(400);

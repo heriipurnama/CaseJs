@@ -1,10 +1,13 @@
 `use strict`;
 
 const bcrypt = require("bcrypt");
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 let { user } = require("../db/models");
 let baseResponse = require("../helpers/response");
 const token = require("../helpers/token");
+
 
 // const sendEmail = require("../services/welcomingEmail");
 const ServiceQueueSendMail = require("../services/ServiceQueueSendMail")
@@ -107,6 +110,28 @@ class UserController {
         throw new Error(`Wrong password!`);
       }
       return baseResponse({ message: "Login success", data: token(datas) })(
+        res,
+        200
+      );
+    } catch (err) {
+      res.status(403);
+      next(err);
+    }
+  }
+
+  static async signout(req, res, next) {
+ 
+    try {
+      let token = req.headers.authorization;
+      // let datas = jwt.verify(token, process.env.SECRET_KEY);
+      // console.log('datas',datas);
+      // req.user = await user.destroy({
+      //   where: {
+      //     id: req.params.id,
+      //   },
+      // });
+
+      return baseResponse({ message: "Logout success" })(
         res,
         200
       );

@@ -15,6 +15,7 @@ const errorHandler = require("./src/middleware/errorHandler");
 
 const loggerMiddleware = require("./src/middleware/logger");
 const serviceQueueSendMail = require("./src/services/ServiceQueueSendMail");
+const cronJob = require("./src/services/CronjobEmail")
 
 const app = express();
 app.use(express.json());
@@ -53,11 +54,14 @@ app.use(Sentry.Handlers.tracingHandler());
 // app.use(logger2)
 
 // Schedule tasks to be run on the server.
-cron.schedule("* 21 * * *", serviceQueueSendMail.sendMailCronJobQueque());
+//cron.schedule("* 21 * * *", serviceQueueSendMail.sendMailCronJobQueque());
+//cron.schedule("* * * * *", cronJob());
 
 app.use(cors());
 app.use(logMorgan);
 // app.use(loggerMiddleware);
+app.use(express.static(__dirname + '/public/pages/index'));
+
 app.use("/admin/queques", routerBullBoard);
 app.use("/api/v1", routers);
 app.use(Sentry.Handlers.errorHandler());
