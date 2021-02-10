@@ -23,7 +23,7 @@
 							}
 						},
 						"url": {
-							"raw": "127.0.0.1:4000/authors/getById/:id",
+							"raw": "127.0.0.1:4000/api/v1/authors/:id",
 							"host": [
 								"127",
 								"0",
@@ -32,8 +32,9 @@
 							],
 							"port": "4000",
 							"path": [
+								"api",
+								"v1",
 								"authors",
-								"getById",
 								":id"
 							],
 							"variable": [
@@ -50,9 +51,15 @@
 					"name": "127.0.0.1:4000/authors",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJsb3ZlckBtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYxMjc2ODU3MSwiZXhwIjoxNjEyNzcyMTcxfQ.CZ4XFIJEg1MGN0UC576FCK3SYofJXpNgOEOuAEa_3RE",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "127.0.0.1:4000/authors",
+							"raw": "127.0.0.1:4000/api/v1/authors",
 							"host": [
 								"127",
 								"0",
@@ -61,6 +68,8 @@
 							],
 							"port": "4000",
 							"path": [
+								"api",
+								"v1",
 								"authors"
 							]
 						}
@@ -71,10 +80,16 @@
 					"name": "127.0.0.1:4000/authors",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ1c2VyQG1haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MTI3NjAwNzIsImV4cCI6MTYxMjc2MzY3Mn0.0y84mZ_jy3Y5t72-hdHht6bVPHoAlf6ZOUP5g3WjOh4",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n    \"first_name\": \"dia\",\n    \"last_name\": \"adalah\",\n    \"email\": \"dia@mail.com\"\n}",
+							"raw": "{   \n    \"first_name\": \"alpha\",\n    \"last_name\": \"alpha\",\n    \"email\": \"alpha@yahoo.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -82,7 +97,7 @@
 							}
 						},
 						"url": {
-							"raw": "127.0.0.1:4000/authors",
+							"raw": "127.0.0.1:4000/api/v1/authors",
 							"host": [
 								"127",
 								"0",
@@ -91,6 +106,8 @@
 							],
 							"port": "4000",
 							"path": [
+								"api",
+								"v1",
 								"authors"
 							]
 						}
@@ -101,9 +118,15 @@
 					"name": "127.0.0.1:4000/authors/getById/:id",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJsb3ZlckBtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYxMjc2ODU3MSwiZXhwIjoxNjEyNzcyMTcxfQ.CZ4XFIJEg1MGN0UC576FCK3SYofJXpNgOEOuAEa_3RE",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "127.0.0.1:4000/authors/getById/:id",
+							"raw": "127.0.0.1:4000/api/v1/authors/1",
 							"host": [
 								"127",
 								"0",
@@ -112,15 +135,10 @@
 							],
 							"port": "4000",
 							"path": [
+								"api",
+								"v1",
 								"authors",
-								"getById",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"1"
 							]
 						}
 					},
@@ -159,7 +177,13 @@
 					"name": "upload poto",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -195,8 +219,124 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/api/v1/authors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/authors",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/api/v1/authors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/authors",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/api/v1/authors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/authors",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/api/v1/books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/books",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/api/v1/authors/policy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/authors/policy",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"policy"
 							]
 						}
 					},
@@ -288,6 +428,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/api/v1/books",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"authorId\": 1,\n    \"publisherId\": 1,\n    \"title\": \"232\",\n    \"price\": \"1212\",\n    \"year\": \"2021-12-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/books",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -301,7 +473,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"origin\": \"501\",\n    \"destination\": \"114\",\n    \"weight\": 900,\n    \"courier\": \"jne\"\n}",
+							"raw": "{\n    \"origin\": \"12\",\n    \"destination\": \"114\",\n    \"weight\": 900,\n    \"courier\": \"jne\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -391,6 +563,233 @@
 								"users",
 								"checkongkir",
 								"city"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "publishers",
+			"item": [
+				{
+					"name": "127.0.0.1:4000/api/v1/publishers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/publishers",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"publishers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:4000/api/v1/publishers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"oo\",\n    \"address\": \"12\",\n    \"email\": \"\",\n    \"phone\": \"\",\n    \"website\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/publishers",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"publishers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"user\",\n    \"lastName\": \"user\",\n    \"email\": \"heri.purnama71@xapiens.id\",\n    \"password\": \"heri123!\",\n    \"photo\":\"null\",\n    \"role\":\"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/users/auth/signup",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJsb3ZlckBtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYxMjgxNzc0NSwiZXhwIjoxNjEyODIxMzQ1fQ.dMxyFkKV5fuZ9ui3So58sGlc3vF-5gfHYbCwuysODCY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/users",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"lover@mail.com\",\n    \"password\": \"heri123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/users/auth/signin",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUserAuth",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ1c2VyQG1haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MTI1MTIzNTYsImV4cCI6MTYxMjUxNTk1Nn0.saL5ekym5q8HJlBZEkkI40FET-XDCE56xSMO-1MzZ0o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/users/auth/profile",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login role User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@mail.com\",\n    \"password\": \"heri123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:4000/api/v1/users/auth/signin",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"auth",
+								"signin"
 							]
 						}
 					},
