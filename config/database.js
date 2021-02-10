@@ -8,6 +8,15 @@ module.exports = {
     "host" : process.env.DBHOST,
     "dialect" : process.env.DBDIALECT, // untuk default port 5432
     "port" : process.env.DBPORT, // untuk custom port
+    "logging": false
+  },
+  "production" : {
+    "username" : process.env.DBUSER_PROD,
+    "password" : process.env.DBPASSWORD_PROD,
+    "database" : process.env.DBNAME_PROD,
+    "host" : process.env.DBHOST_PROD,
+    "dialect" : process.env.DBDIALECT_PROD, // untuk default port 5432
+    "port" : process.env.DBPORT_PROD, // untuk custom port
     "logging": false,
     "dialectOptions": {
       ssl:  {
@@ -15,8 +24,5 @@ module.exports = {
         rejectUnauthorized: false
     }
     }
-  },
-  "production" :{
-    "dialect" : process.env.DBDIALECT
   }
 }
