@@ -13,8 +13,8 @@ routers.route("/").get(Auth, authorizeAdmin, UserController.getAllDatas);
 
 routers
   .route("/:id")
-  .get(UserController.getById)
-  .delete(UserController.deleteUser)
+  .get(Auth, UserController.getById)
+  .delete(Auth, authorizeAdmin,UserController.deleteUser)
   .put(
     Auth,
     authorizeAdmin,
