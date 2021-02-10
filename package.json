@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "node app.js",
-    "start": "./node_modules/nodemon/bin/nodemon.js app.js"
+    "start": "./node_modules/nodemon/bin/nodemon.js app.js",
+    "migrate": "node_modules/sequelize-cli/lib/sequelize db:migrate",
+    "seed": "sequelize db:seed:all"
   },
   "keywords": [
     "task",
