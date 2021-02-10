@@ -15,5 +15,9 @@ module.exports = {
         rejectUnauthorized: false
     }
     }
+  },
+  "production" :{
+    "dialect" : process.env.DBDIALECT,
+    "use_env_variable":"DATABASE_URL"
   }
 }

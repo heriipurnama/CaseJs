@@ -15,3 +15,8 @@
 [2021-02-10T09:49:38+07:00] "GET /admin/queques/api/queues/?sendMailCronJob=latest&sendMailWelcoming=latest" 200 6589 - 14.593 ms
 [2021-02-10T09:49:43+07:00] "GET /admin/queques/api/queues/?sendMailCronJob=latest&sendMailWelcoming=latest" 304 - - 28.624 ms
 [2021-02-10T09:49:48+07:00] "GET /admin/queques/api/queues/?sendMailCronJob=latest&sendMailWelcoming=latest" 304 - - 21.699 ms
+[2021-02-10T11:53:31+07:00] "POST /api/v1/users/auth/signup" 422 68 - 33.881 ms
+[2021-02-10T11:53:58+07:00] "POST /api/v1/users/auth/signup" 200 315 - 182.997 ms
+[2021-02-10T11:54:32+07:00] "POST /api/v1/users/auth/signin" 200 259 - 114.517 ms
+[2021-02-10T11:56:48+07:00] "PUT /api/v1/authors/uploadPhoto/2" 401 108 - 12.022 ms
+[2021-02-10T12:00:31+07:00] "POST /api/v1/users/auth/signup" 422 46 - 59.982 ms
