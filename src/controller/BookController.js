@@ -16,7 +16,11 @@ class BookController {
     try {
       const limit = 10;
       const offset =0;
-      const payload = await book.findAll();
+      const payload = await book.findAll({
+        limit,
+        page,
+        offset: limit * page - limit,
+      });
 
       baseResponse({ message: "books retrieved", data: payload })(res);
     } catch (error) {

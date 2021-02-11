@@ -8,15 +8,20 @@ let { user } = require("../db/models");
 let baseResponse = require("../helpers/response");
 const token = require("../helpers/token");
 
-
 // const sendEmail = require("../services/welcomingEmail");
-const ServiceQueueSendMail = require("../services/ServiceQueueSendMail")
+const ServiceQueueSendMail = require("../services/ServiceQueueSendMail");
 
 
 class UserController {
   static async getAllDatas(req, res, next) {
     try {
-      const payload = await user.findAll();
+      const limit =  10;
+      const page =  0;
+      const payload = await user.findAll({
+        limit,
+        page,
+        offset: limit * page - limit,
+      });
       baseResponse({ message: "user retrieved", data: payload })(res, 200);
     } catch (error) {
       res.status(400);
@@ -120,7 +125,6 @@ class UserController {
   }
 
   static async signout(req, res, next) {
- 
     try {
       let token = req.headers.authorization;
       // let datas = jwt.verify(token, process.env.SECRET_KEY);
@@ -131,10 +135,7 @@ class UserController {
       //   },
       // });
 
-      return baseResponse({ message: "Logout success" })(
-        res,
-        200
-      );
+      return baseResponse({ message: "Logout success" })(res, 200);
     } catch (err) {
       res.status(403);
       next(err);
@@ -145,7 +146,6 @@ class UserController {
     res.status(200);
     return res.json(req.user.entity);
   }
-
 }
 
 module.exports = UserController;
