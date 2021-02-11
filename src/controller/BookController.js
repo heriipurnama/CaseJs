@@ -15,7 +15,7 @@ class BookController {
   static async getAllDatas(req, res, next) {
     try {
       const limit = 10;
-      const offset =0;
+      const offset = 0;
       const payload = await book.findAll({
         limit,
         page,
